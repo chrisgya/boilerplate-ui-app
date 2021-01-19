@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ChangePassword() {
+const ChangePasswordForm = () => {
     return (
         <div>
             Hello Change Password!
@@ -8,4 +8,4 @@ function ChangePassword() {
     )
 }
 
-export default ChangePassword
+export default ChangePasswordForm;

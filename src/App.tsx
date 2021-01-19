@@ -3,7 +3,7 @@ import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom
 import { ToastContainer } from "react-toastify";
 import Home from './component/home/Home';
 import { NotFound, PrivateRoute } from './component/shared';
-import { ChangePassword, ForgotPassword, Login, Profile, ResetPassword, Signup } from './component/user';
+import { ChangePassword, ForgotPassword, Login, Profile, ResetPassword, Signup, VerifyAccount } from './component/user';
 
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {
@@ -19,6 +19,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/reset-password/:token" component={ResetPassword} />
+        <Route exact path="/verify-account/:token" component={VerifyAccount} />
 
         <PrivateRoute exact path="/change-password" component={ChangePassword} />
         {/* <PrivateRoute path="/activities/:id" component={ActivityDetails} /> */}

@@ -2,21 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import { Provider } from 'jotai';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import './index.css';
 import "react-toastify/dist/ReactToastify.min.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AppProvider } from './store/context';
+
+// import { AppProvider } from './store/context';
 
 export const history = createBrowserHistory();
 
+const queryClient = new QueryClient()
+
 ReactDOM.render(
   <Router history={history}>
-    <AppProvider>
-      <App />
-    </AppProvider>
+    <QueryClientProvider client={queryClient}>
+      <Provider>
+        <App />
+      </Provider>
+    </QueryClientProvider>
   </Router>,
   document.getElementById('root')
 );

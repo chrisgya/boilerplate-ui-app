@@ -9,7 +9,7 @@ type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputEle
   dontShowError?: boolean;
 };
 
-const Input: FC<InputProps> = ({ name, type, label, placeholder, dontShowError }) => {
+const Input: FC<InputProps> = ({ name, type, label, placeholder, dontShowError, ...rest }) => {
   const { register, formState } = useFormContext();
 
   return (
@@ -28,6 +28,7 @@ const Input: FC<InputProps> = ({ name, type, label, placeholder, dontShowError }
         id={name}
         placeholder={placeholder}
         ref={register}
+        {...rest}
       />
 
       {!!formState.touched[name] && !!formState.errors[name] && !dontShowError && (

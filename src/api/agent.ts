@@ -1,13 +1,18 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { history } from "..";
+import { ILoginRequest, ILoginResponse } from "../common/interfaces/ILogin";
+import { IResetPasswordRequest } from "../common/interfaces/IResetPassword";
+import { ISignupRequest } from "../common/interfaces/ISignup";
+import { IUser } from "../common/interfaces/IUser";
+import { ACCESS_TOKEN } from "../common/utils/constants";
+import { logout } from "../common/utils/helper";
 
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.request.use(
   (config) => {
-    const token = window.sessionStorage.getItem("jwt");
+    const token = window.sessionStorage.getItem(ACCESS_TOKEN);
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
@@ -20,19 +25,21 @@ axios.interceptors.response.use(undefined, (error) => {
   if (error.message === "Network Error" && !error.response) {
     toast.error("Network error - make sure API is running!");
   } else {
-    const { status, data, config, headers } = error.response;
+    // const { status, data, config, headers } = error.response;
+    const { status } = error.response;
     if (
-      status === 401 &&
-      headers["www-authenticate"] === 'Bearer error="invalid_token", error_description="The token is expired"'
+      status === 401 // &&   headers["www-authenticate"] === 'Bearer error="invalid_token", error_description="The token is expired"'
     ) {
-      window.localStorage.removeItem("jwt");
-      history.push("/");
+      logout();
       toast.info("Your session has expired, please login again");
-    } else if (status === 404) {
-      history.push("/notfound");
-    } else if (status === 400 && config.method === "get" && data.errors.hasOwnProperty("id")) {
-      history.push("/notfound");
-    } else if (status === 500) {
+    }
+    // else if (status === 404) {
+    //   history.push("/notfound");
+    // } 
+    // else if (status === 400 && config.method === "get" && data.errors.hasOwnProperty("id")) {
+    //   history.push("/notfound");
+    // }
+    else if (status === 500) {
       toast.error("Server error - check the terminal for more info!");
     }
   }
@@ -57,6 +64,18 @@ const requests = {
   },
 };
 
+const User = {
+  current: (): Promise<IUser> => requests.get("/users/me"),
+  login: (req: ILoginRequest): Promise<ILoginResponse> => requests.post(`/auth/login`, req),
+  refreshToken: (token: string): Promise<ILoginResponse> => requests.get(`/auth/refresh-token/${token}`),
+  signup: (user: ISignupRequest): Promise<IUser> => requests.post(`/auth/signup`, user),
+  verifyAccount: (token: string): Promise<void> => requests.put(`/auth/verify-account/${token}`, {}),
+  forgotPassword: (email: string): Promise<void> => requests.put(`/auth/forgot-password/${email}`, {}),
+  requestConfirmationLink: (email: string): Promise<void> => requests.put(`/auth/request-confirmation-link/${email}`, {}),
+  resetPassword: (req: IResetPasswordRequest): Promise<void> => requests.put(`/auth/reset-password/${req.token}`, req),
+};
+
+
 // const Activities = {
 //   list: (params: URLSearchParams): Promise<IActivitiesEnvelope> =>
 //     axios.get("/activities", { params: params }).then(responseBody),
@@ -68,11 +87,6 @@ const requests = {
 //   unattend: (id: string) => requests.del(`/activities/${id}/attend`),
 // };
 
-// const User = {
-//   current: (): Promise<IUser> => requests.get("/user"),
-//   login: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/login`, user),
-//   register: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/register`, user),
-// };
 
 // const Profiles = {
 //   get: (username: string): Promise<IProfile> => requests.get(`/profiles/${username}`),
@@ -90,7 +104,7 @@ const requests = {
 
 const agent = {
   // Activities,
-  // User,
+  User,
   // Profiles,
 };
 
