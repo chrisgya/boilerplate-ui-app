@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from 'react-hook-form';
 import React from 'react';
 import { loginSchema } from '../../common/validations';
-import { ILoginRequest } from '../../common/interfaces/ILogin';
 import { Button, Input } from '../../common/formControls';
 import FormLayout from '../../common/Layout/FormLayout';
 import agent from '../../api/agent';
@@ -15,6 +14,7 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../common/utils/constants';
 import { AxiosResponse } from 'axios';
 import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
 import FormTitleAndError from '../../common/Layout/FormTitleAndError';
+import { ILoginRequest } from '../../common/interfaces/IUser';
 const defaultValues = {
     email: '',
     password: ''
@@ -48,7 +48,7 @@ const LoginForm = () => {
 
     return (
         <FormLayout>
-            <div className="flex flex-col w-full p-8 mx-auto mt-10 bg-gray-100 border rounded-lg shadow-sm lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
+            <div className="smallInnerFormContainer">
 
                 <FormTitleAndError title="LOGIN" mutation={mutation} email={methods.getValues('email')} />
 

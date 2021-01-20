@@ -38,7 +38,7 @@ const ForgetPasswordForm = () => {
 
     return (
         <FormLayout>
-            <div className="flex flex-col w-full p-8 mx-auto mt-10 bg-gray-100 border rounded-lg shadow-sm lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
+            <div className="smallInnerFormContainer">
 
                 <FormTitleAndError title="REQUEST PASSWORD RESET" mutation={mutation} />
 

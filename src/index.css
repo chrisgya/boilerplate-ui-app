@@ -36,5 +36,21 @@
 
  
 body{
-   @apply bg-gradient-to-r from-green-400 to-blue-500
+   @apply bg-gradient-to-r from-green-400 to-blue-500 overflow-x-hidden
 }
+
+a{
+cursor: pointer;
+}
+
+.smallInnerFormContainer{
+  @apply flex flex-col w-full p-8 mx-auto bg-gray-100 border rounded-lg shadow-sm lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0
+}
+.largeInnerFormContainer{
+  @apply flex flex-col w-full p-8 mx-auto bg-gray-100 border rounded-lg shadow-sm md:w-1/2 md:ml-auto md:mt-0
+}
+
+
+.bg-sidebar { background: #3d68ff; }
+.active-nav-link { background: #1947ee; }
+.nav-item:hover { background: #1947ee; }

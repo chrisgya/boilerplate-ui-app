@@ -5,13 +5,13 @@ import React from 'react';
 import { createUserSchema } from '../../common/validations';
 import { Button, Input } from '../../common/formControls';
 import FormLayout from '../../common/Layout/FormLayout';
-import { ISignupRequest } from '../../common/interfaces/ISignup';
 import { useMutation } from 'react-query';
 import agent from '../../api/agent';
 import { toast } from 'react-toastify';
 import { AxiosResponse } from 'axios';
 import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
 import FormTitleAndError from '../../common/Layout/FormTitleAndError';
+import { ISignupRequest } from '../../common/interfaces/IUser';
 
 const defaultValues = {
     username: '',
@@ -47,23 +47,31 @@ const SignupForm = () => {
     }
     return (
         <FormLayout>
-            <div className="flex flex-col w-full p-8 mx-auto mt-10 bg-gray-100 border rounded-lg shadow-sm md:w-1/2 md:ml-auto md:mt-0">
+            <div className="largeInnerFormContainer">
 
                 <FormTitleAndError title="CREATE YOUR ACCOUNT" mutation={mutation} />
 
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
                         <Input name="username" type="text" label="Username" disabled={mutation.isLoading} />
-                        <Input name="firstName" type="text" label="First Name" disabled={mutation.isLoading} />
+
+                        <div className="flex flex-wrap -mx-3">
+                            <div className="w-full px-3 md:w-1/2">
+                                <Input name="firstName" type="text" label="First Name" disabled={mutation.isLoading} />
+                            </div>
+                            <div className="w-full px-3 md:w-1/2">
+                                <Input name="lastName" type="text" label="Last Name" disabled={mutation.isLoading} />
+                            </div>
+                        </div>
+
                         <Input name="middleName" type="text" label="Middle Name" disabled={mutation.isLoading} />
-                        <Input name="lastName" type="text" label="Last Name" disabled={mutation.isLoading} />
                         <Input name="email" type="email" label="Email" disabled={mutation.isLoading} />
 
-                        <div className="md:flex md:flex-wrap md:-m-2">
-                            <div className="md:w-1/2">
+                        <div className="flex flex-wrap -mx-3">
+                            <div className="w-full px-3 md:w-1/2">
                                 <Input name="password" type="password" label="Password" disabled={mutation.isLoading} />
                             </div>
-                            <div className="md:w-1/2">
+                            <div className="w-full px-3 md:w-1/2">
                                 <Input name="confirmPassword" type="password" label="Confirm Password" disabled={mutation.isLoading} />
                             </div>
                         </div>

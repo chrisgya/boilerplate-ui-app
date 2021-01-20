@@ -1,4 +1,6 @@
 export { default as MenuIcon } from '@material-ui/icons/Menu';
+export { default as MenuOpenIcon } from '@material-ui/icons/MenuOpen';
+export { default as CloseIcon } from '@material-ui/icons/Close';
 
 export { default as AccessAlarmIcon } from '@material-ui/icons/AccessAlarm';
 export { default as AddAlertIcon } from '@material-ui/icons/AddAlert';

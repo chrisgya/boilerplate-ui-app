@@ -5,17 +5,17 @@ import React, { useEffect, useState } from 'react';
 import { resetPasswordSchema } from '../../common/validations';
 import { Button, Input } from '../../common/formControls';
 import FormLayout from '../../common/Layout/FormLayout';
-import { IResetPasswordRequest } from '../../common/interfaces/IResetPassword';
 import { useMutation } from 'react-query';
 import agent from '../../api/agent';
 import { toast } from 'react-toastify';
 import FormTitleAndError from '../../common/Layout/FormTitleAndError';
 import { AxiosResponse } from 'axios';
 import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
+import { IResetPasswordRequest } from '../../common/interfaces/IUser';
 
 const defaultValues = {
     token: '',
-    email: '',
+    confirmPassword: '',
     password: ''
 }
 const ResetPasswordForm = () => {
@@ -50,7 +50,7 @@ const ResetPasswordForm = () => {
 
     return (
         <FormLayout>
-            <div className="flex flex-col w-full p-8 mx-auto mt-10 bg-gray-100 border rounded-lg shadow-sm lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
+            <div className="smallInnerFormContainer">
 
                 <FormTitleAndError title="CREATE NEW PASSWORD" mutation={mutation} />
 

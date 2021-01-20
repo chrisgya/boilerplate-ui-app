@@ -1,8 +1,8 @@
 import { useAtom } from "jotai";
 import React from "react";
 import { RouteProps, RouteComponentProps, Route, Redirect } from "react-router-dom";
+import { SideBar, Navbar } from ".";
 import { isLoginAtom } from "../../store/userAtom";
-import Navbar from "./Navbar";
 
 interface IProps extends RouteProps {
   component: React.ComponentType<RouteComponentProps<any>>;
@@ -16,7 +16,7 @@ export const PrivateRoute: React.FC<IProps> = ({ component: Component, ...rest }
     <Route
       {...rest}
       render={(props) =>
-        isLoggedIn ? <>< Navbar /> <Component {...props} /></> : <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
+        isLoggedIn ? <>< Navbar /><div className="flex"><SideBar /> <div className="w-screen m-3"><Component {...props} /></div></div></> : <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
       }
     />
   );

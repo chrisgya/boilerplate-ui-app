@@ -5,13 +5,11 @@
 
 ### https://mailtrap.io/inboxes/1116006/messages/2037420267
 
+## TAILWINDCSS
 ### https://blocks.wickedtemplates.com/navigation
-
+### https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/quick-start
 ### https://tailwindtemplates.io
 
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## set input focus with React-Hook-Form
 ---
 
