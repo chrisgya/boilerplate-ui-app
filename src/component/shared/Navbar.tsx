@@ -60,8 +60,7 @@ const Navbar = () => {
                         <li>
                             <a
                                 className="flex items-center px-3 py-2 text-xs font-bold leading-snug text-white hover:opacity-75"
-                                href="#pablo"
-                            >
+                                href="#pablo">
                                 <FacebookIcon className="text-lg text-white opacity-75 leading-lg" /><span className="ml-2">Share</span>
                             </a>
                         </li>
@@ -71,6 +70,7 @@ const Navbar = () => {
                 </ul>
 
             </div>
+
         </div>
     </nav>
     );

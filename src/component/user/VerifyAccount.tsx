@@ -1,5 +1,5 @@
-import { Link, useHistory, useRouteMatch } from 'react-router-dom'
-import React, { useEffect } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom'
+import React, { useCallback, useEffect } from 'react';
 import FormLayout from '../../common/Layout/FormLayout';
 import agent from '../../api/agent';
 import { useMutation } from 'react-query';
@@ -11,9 +11,9 @@ import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
 const VerifyAccount = () => {
 
     const history = useHistory();
-    const match = useRouteMatch<{ token: string }>();
+    const { token } = useParams<{ token: string }>();
 
-    const mutation = useMutation(agent.User.verifyAccount, {
+    const { mutate, isLoading } = useMutation(agent.User.verifyAccount, {
         onSuccess: (_data) => {
             toast.success("Account successfully verified!");
             history.push('/login');
@@ -25,11 +25,8 @@ const VerifyAccount = () => {
         }
     });
 
-    useEffect(() => {
-        if (match.params.token) {
-            mutation.mutate(match.params.token);
-        }
-    }, [match.params.token])
+    const onSubmit = useCallback(() => { mutate(token) }, [mutate, token]);
+    useEffect(() => { onSubmit(); }, [onSubmit])
 
     return (
         <FormLayout>
@@ -37,7 +34,7 @@ const VerifyAccount = () => {
 
                 <FormTitleAndError title="VERIFYING ACCOUNT..." />
 
-                {mutation.isLoading && <div>Show spinner...</div>}
+                {isLoading && <div>Show spinner...</div>}
 
             </div>
 

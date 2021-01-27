@@ -9,3 +9,8 @@ export const logout = () => {
     window.sessionStorage.removeItem(REFRESH_TOKEN);
     history.push("/login");
 }
+
+export const getQueryString = (locationHook: any, paramName: string) => {
+    const searchParams = new URLSearchParams(locationHook().search);
+    return searchParams.get(paramName)
+}

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import Home from './component/home/Home';
 import { NotFound, PrivateRoute } from './component/shared';
 import { ChangePassword, ForgotPassword, Login, Profile, ResetPassword, Signup, VerifyAccount } from './component/user';
 
 
-const App: React.FC<RouteComponentProps> = ({ location }) => {
+const App = () => {
   return (
     <div>
       <ToastContainer position="bottom-right" />
@@ -34,5 +34,5 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
   );
 }
 
-export default withRouter(App);
+export default App;
 

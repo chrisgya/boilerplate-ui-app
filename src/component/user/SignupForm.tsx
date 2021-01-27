@@ -1,7 +1,7 @@
 import { Link, useHistory } from 'react-router-dom'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from 'react-hook-form';
-import React from 'react';
+import React, { useRef } from 'react';
 import { createUserSchema } from '../../common/validations';
 import { Button, Input } from '../../common/formControls';
 import FormLayout from '../../common/Layout/FormLayout';
@@ -25,6 +25,7 @@ const defaultValues = {
 }
 const SignupForm = () => {
     const history = useHistory();
+    const topRef = useRef<HTMLDivElement>(null);
 
     const methods = useForm<ISignupRequest>({
         mode: "onBlur",
@@ -38,22 +39,54 @@ const SignupForm = () => {
             toast.success("Account successfully created. Email sent to registered email address for verification!");
             history.push('/login');
         },
-        onError: (error: AxiosResponse<IErrorMessage>) => console.log('chrisgya error: ', error)
+        onError: (error: AxiosResponse<IErrorMessage>) => {
+            if (topRef.current) topRef.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            console.log('chrisgya error: ', error);
+        }
+    });
+
+    const usernameMutation = useMutation(agent.User.checkUsernameExist, {
+        onSuccess: (data) => {
+            if (!!data) {
+                methods.setValue("username", null);
+                toast.error("username is taken already!");
+            }
+        }
+    });
+
+    const emailMutation = useMutation(agent.User.checkEmailExist, {
+        onSuccess: (data) => {
+            if (!!data) {
+                methods.setValue("email", null);
+                toast.error("email is taken already!");
+            }
+        }
     });
 
     const onSubmit = (data: ISignupRequest) => {
         if (!data.middleName) data.middleName = null;
         mutation.mutate(data);
     }
+
+    const onUsernameBlur = async () => {
+        if (!methods.errors.username?.message)
+            await usernameMutation.mutateAsync(methods.getValues("username"));
+    }
+
+    const onEmailBlur = async () => {
+        if (!methods.errors.email?.message)
+            await emailMutation.mutateAsync(methods.getValues("email"));
+    }
+
     return (
         <FormLayout>
-            <div className="largeInnerFormContainer">
+            <div className="largeInnerFormContainer" ref={topRef}>
 
                 <FormTitleAndError title="CREATE YOUR ACCOUNT" mutation={mutation} />
 
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-                        <Input name="username" type="text" label="Username" disabled={mutation.isLoading} />
+                        <Input name="username" type="text" label="Username" onBlur={onUsernameBlur} disabled={mutation.isLoading} />
 
                         <div className="flex flex-wrap -mx-3">
                             <div className="w-full px-3 md:w-1/2">
@@ -65,7 +98,7 @@ const SignupForm = () => {
                         </div>
 
                         <Input name="middleName" type="text" label="Middle Name" disabled={mutation.isLoading} />
-                        <Input name="email" type="email" label="Email" disabled={mutation.isLoading} />
+                        <Input name="email" type="email" label="Email" onBlur={onEmailBlur} disabled={mutation.isLoading} />
 
                         <div className="flex flex-wrap -mx-3">
                             <div className="w-full px-3 md:w-1/2">

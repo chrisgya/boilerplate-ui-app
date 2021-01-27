@@ -23,7 +23,7 @@ axios.interceptors.response.use(undefined, (error) => {
     toast.error("Network error - make sure API is running!");
   } else {
     // const { status, data, config, headers } = error.response;
-    const { status } = error.response;
+    const status = error?.response?.status;
     if (
       status === 401 // &&   headers["www-authenticate"] === 'Bearer error="invalid_token", error_description="The token is expired"'
     ) {
@@ -67,6 +67,8 @@ const User = {
   login: (req: ILoginRequest): Promise<ILoginResponse> => requests.post(`/auth/login`, req),
   refreshToken: (token: string): Promise<ILoginResponse> => requests.get(`/auth/refresh-token/${token}`),
   signup: (user: ISignupRequest): Promise<IUser> => requests.post(`/auth/signup`, user),
+  checkUsernameExist: (username: string): Promise<boolean> => requests.get(`/auth/username-exist/${username}`),
+  checkEmailExist: (email: string): Promise<boolean> => requests.get(`/auth/email-exist/${email}`),
   verifyAccount: (token: string): Promise<void> => requests.put(`/auth/verify-account/${token}`, {}),
   forgotPassword: (email: string): Promise<void> => requests.put(`/auth/forgot-password/${email}`, {}),
   requestConfirmationLink: (email: string): Promise<void> => requests.put(`/auth/request-confirmation-link/${email}`, {}),

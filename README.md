@@ -1,16 +1,22 @@
 ---
-### https://material-ui.com/components/material-icons/
+### https://heroicons.com
 
 ### https://github.com/pmndrs/jotai
 
 ### https://mailtrap.io/inboxes/1116006/messages/2037420267
 
 ## TAILWINDCSS
-### https://blocks.wickedtemplates.com/navigation
-### https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/quick-start
-### https://tailwindtemplates.io
+---
+
+https://blocks.wickedtemplates.com/navigation
+https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/quick-start
+https://tailwindtemplates.io
+https://tailwindcomponents.com/
+
+---
 
 ## set input focus with React-Hook-Form
+
 ---
 
 import React, { useRef } from "react"
@@ -22,6 +28,7 @@ const firstNameRef = useRef<HTMLInputElement>()
 const onSubmit = data => alert(JSON.stringify(data))
 
 return (
+
 <form onSubmit={handleSubmit(onSubmit)}>
 <input name="firstName" ref={(e: HTMLInputElement) => {
 register(e)

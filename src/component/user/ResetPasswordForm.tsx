@@ -1,7 +1,6 @@
-import { Link, useHistory, useRouteMatch } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from 'react-hook-form';
-import React, { useEffect, useState } from 'react';
 import { resetPasswordSchema } from '../../common/validations';
 import { Button, Input } from '../../common/formControls';
 import FormLayout from '../../common/Layout/FormLayout';
@@ -19,15 +18,9 @@ const defaultValues = {
     password: ''
 }
 const ResetPasswordForm = () => {
-    const [token, setToken] = useState<string>('');
-    const history = useHistory();
-    const match = useRouteMatch<{ token: string }>();
 
-    useEffect(() => {
-        if (match.params.token) {
-            setToken(match.params.token);
-        }
-    }, [match.params.token])
+    const history = useHistory();
+    const { token } = useParams<{ token: string }>();
 
     const methods = useForm<IResetPasswordRequest>({
         mode: "onChange",
