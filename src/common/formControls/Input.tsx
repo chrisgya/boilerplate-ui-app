@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import cx from "classnames";
 import { useFormContext } from "react-hook-form";
 
@@ -9,33 +9,33 @@ type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputEle
   dontShowError?: boolean;
 };
 
-const Input: FC<InputProps> = ({ name, type, label, placeholder, dontShowError, ...rest }) => {
-  const { register, formState } = useFormContext();
+const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const { formState } = useFormContext();
 
   return (
     <div className="block my-3">
-      {label && <label className="block" htmlFor={name}>
-        {label}
+      {props.label && <label className="block" htmlFor={props.name}>
+        {props.label}
       </label>
       }
       <input
         className={cx(
           "border-0 w-full p-1.5 my-1 focus:outline-none focus:ring focus:border-blue-300 shadow-md",
-          formState.touched[name] && formState.errors[name] && !dontShowError && "border-red-600 border border-solid"
+          formState.touched[props.name] && formState.errors[props.name] && !props.dontShowError && "border-red-600 border border-solid"
         )}
-        type={type}
-        name={name}
-        id={name}
-        placeholder={placeholder}
-        ref={register}
-        {...rest}
+        type={props.type}
+        name={props.name}
+        id={props.name}
+        placeholder={props.placeholder}
+        ref={ref}
+        onBlur={props.onBlur}
       />
 
-      {!!formState.touched[name] && !!formState.errors[name] && !dontShowError && (
-        <p className="text-red-600">{formState.errors[name].message}</p>
+      {!!formState.touched[props.name] && !!formState.errors[props.name] && !props.dontShowError && (
+        <p className="text-red-600">{formState.errors[props.name].message}</p>
       )}
     </div>
   );
-};
+});
 
 export { Input };

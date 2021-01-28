@@ -26,6 +26,8 @@ const defaultValues = {
 const SignupForm = () => {
     const history = useHistory();
     const topRef = useRef<HTMLDivElement>(null);
+    const usernameRef = useRef<HTMLInputElement>();
+    const emailRef = useRef<HTMLInputElement>();
 
     const methods = useForm<ISignupRequest>({
         mode: "onBlur",
@@ -49,6 +51,7 @@ const SignupForm = () => {
         onSuccess: (data) => {
             if (!!data) {
                 methods.setValue("username", null);
+                usernameRef.current?.focus();
                 toast.error("username is taken already!");
             }
         }
@@ -58,6 +61,7 @@ const SignupForm = () => {
         onSuccess: (data) => {
             if (!!data) {
                 methods.setValue("email", null);
+                emailRef.current?.focus();
                 toast.error("email is taken already!");
             }
         }
@@ -86,26 +90,32 @@ const SignupForm = () => {
 
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-                        <Input name="username" type="text" label="Username" onBlur={onUsernameBlur} disabled={mutation.isLoading} />
+                        <Input name="username" type="text" ref={(e: HTMLInputElement) => {
+                            methods.register(e)
+                            usernameRef.current = e
+                        }} label="Username" onBlur={onUsernameBlur} disabled={mutation.isLoading} />
 
                         <div className="flex flex-wrap -mx-3">
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="firstName" type="text" label="First Name" disabled={mutation.isLoading} />
+                                <Input name="firstName" type="text" ref={methods.register} label="First Name" disabled={mutation.isLoading} />
                             </div>
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="lastName" type="text" label="Last Name" disabled={mutation.isLoading} />
+                                <Input name="lastName" type="text" ref={methods.register} label="Last Name" disabled={mutation.isLoading} />
                             </div>
                         </div>
 
-                        <Input name="middleName" type="text" label="Middle Name" disabled={mutation.isLoading} />
-                        <Input name="email" type="email" label="Email" onBlur={onEmailBlur} disabled={mutation.isLoading} />
+                        <Input name="middleName" type="text" ref={methods.register} label="Middle Name" disabled={mutation.isLoading} />
+                        <Input name="email" type="email" ref={(e: HTMLInputElement) => {
+                            methods.register(e)
+                            emailRef.current = e
+                        }} label="Email" onBlur={onEmailBlur} disabled={mutation.isLoading} />
 
                         <div className="flex flex-wrap -mx-3">
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="password" type="password" label="Password" disabled={mutation.isLoading} />
+                                <Input name="password" type="password" ref={methods.register} label="Password" disabled={mutation.isLoading} />
                             </div>
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="confirmPassword" type="password" label="Confirm Password" disabled={mutation.isLoading} />
+                                <Input name="confirmPassword" type="password" ref={methods.register} label="Confirm Password" disabled={mutation.isLoading} />
                             </div>
                         </div>
 

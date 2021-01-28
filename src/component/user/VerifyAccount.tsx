@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import FormTitleAndError from '../../common/Layout/FormTitleAndError';
 import { AxiosResponse } from 'axios';
 import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
+import Spin from '../shared/svg/Spin';
 
 const VerifyAccount = () => {
 
@@ -34,7 +35,9 @@ const VerifyAccount = () => {
 
                 <FormTitleAndError title="VERIFYING ACCOUNT..." />
 
-                {isLoading && <div>Show spinner...</div>}
+                {isLoading && <div className="flex justify-center">
+                    <div className="w-12 h-12 text-blue-700"><Spin /></div>
+                </div>}
 
             </div>
 

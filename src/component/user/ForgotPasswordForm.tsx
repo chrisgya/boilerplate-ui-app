@@ -44,7 +44,7 @@ const ForgetPasswordForm = () => {
 
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-                        <Input name="email" type="email" placeholder="Email" disabled={mutation.isLoading} />
+                        <Input name="email" type="email" ref={methods.register} placeholder="Email" disabled={mutation.isLoading} />
 
                         <div className="flex justify-center">
                             <Button type="submit" name="Request reset" isBusy={mutation.isLoading} />

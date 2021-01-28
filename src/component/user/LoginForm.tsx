@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from 'react-hook-form';
-import React from 'react';
+import React, { useRef } from 'react';
 import { loginSchema } from '../../common/validations';
 import { Button, Input } from '../../common/formControls';
 import FormLayout from '../../common/Layout/FormLayout';
@@ -21,7 +21,7 @@ const defaultValues = {
 }
 
 const LoginForm = () => {
-
+    const passwordRef = useRef<HTMLInputElement>();
     const location = useLocation();
     const [, setIsLoggedIn] = useAtom(isLoginAtom);
 
@@ -40,6 +40,7 @@ const LoginForm = () => {
         },
         onError: (error: AxiosResponse<IErrorMessage>) => {
             methods.setValue('password', '');
+            passwordRef.current?.focus();
             console.log('chrisgya error: ', error);
         }
     });
@@ -54,8 +55,11 @@ const LoginForm = () => {
 
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-                        <Input name="email" type="email" placeholder="Email" disabled={mutation.isLoading} />
-                        <Input name="password" type="password" placeholder="Password" disabled={mutation.isLoading} />
+                        <Input name="email" type="email" ref={methods.register} placeholder="Email" disabled={mutation.isLoading} />
+                        <Input name="password" type="password" ref={(e: HTMLInputElement) => {
+                            methods.register(e)
+                            passwordRef.current = e
+                        }} placeholder="Password" disabled={mutation.isLoading} />
 
                         <div className="flex justify-center">
                             <Button type="submit" name="Sign In" isBusy={mutation.isLoading} />
