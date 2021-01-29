@@ -68,10 +68,10 @@ const LoginForm = () => {
                 </FormProvider>
 
             </div>
-            <div className="flex justify-center text-base text-white">
+            <div className="flex justify-center text-base">
                 <div>
-                    <p className="block mt-2">New to Chrisgya? <Link to="/signup" className="font-bold">Sign up</Link></p>
-                    <Link to="/forgot-password" className="block font-bold">Forgot your password?</Link>
+                    <p className="block mt-2">New to Chrisgya? <Link to="/signup" className="font-bold text-blue-500">Sign up</Link></p>
+                    <Link to="/forgot-password" className="block font-bold text-blue-500">Forgot your password?</Link>
                 </div>
             </div>
         </FormLayout>

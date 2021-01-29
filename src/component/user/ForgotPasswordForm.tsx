@@ -53,9 +53,9 @@ const ForgetPasswordForm = () => {
                 </FormProvider>
 
             </div>
-            <div className="flex justify-center text-base text-white">
+            <div className="flex justify-center text-base">
                 <div>
-                    <p className="block mt-2">Remember your password? <Link to="/login" className="font-bold">Login</Link></p>
+                    <p className="block mt-2">Remember your password? <Link to="/login" className="font-bold text-blue-500">Login</Link></p>
                 </div>
             </div>
         </FormLayout>

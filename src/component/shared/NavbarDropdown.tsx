@@ -45,10 +45,10 @@ const NavbarDropdown = () => {
         </div>
         <ul className="flex flex-col p-2 my-2 space-y-1">
           <li>
-            <span onClick={() => navigate('/change-password')} className="block px-2 py-1 transition rounded-md cursor-pointer hover:bg-gray-100">Change Password</span>
+            <span onClick={() => navigate('/profile/1')} className="block px-2 py-1 transition rounded-md cursor-pointer hover:bg-gray-100">Profile</span>
           </li>
           <li>
-            <span onClick={() => navigate('/')} className="block px-2 py-1 transition rounded-md cursor-pointer hover:bg-gray-100">Another Link</span>
+            <span onClick={() => navigate('/change-password')} className="block px-2 py-1 transition rounded-md cursor-pointer hover:bg-gray-100">Change Password</span>
           </li>
         </ul>
         <div className="flex items-center justify-center p-4 text-blue-700 underline border-t">

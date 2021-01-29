@@ -20,23 +20,23 @@
  /* Handle */
  
  ::-webkit-scrollbar-thumb {
-   background: #3b82f6;
+   background: #b7b9bd;
    border-radius: 10px;
  }
  
  ::-webkit-scrollbar-thumb:hover {
-   background:  #3b82f6;
+   background:  #b7b9bd;
  }
  
  ::-webkit-scrollbar-thumb:window-inactive {
-   background:  #3b82f6;
+   background:  #b7b9bd;
  }
  
  /* ----------------Scrollbar styling ends--------------------------- */
 
  
 body{
-   @apply bg-gradient-to-r from-green-400 to-blue-500 overflow-x-hidden
+  @apply bg-blue-50 overflow-x-hidden
 }
 
 a{
@@ -44,13 +44,14 @@ cursor: pointer;
 }
 
 .smallInnerFormContainer{
-  @apply flex flex-col w-full p-8 mx-auto bg-gray-100 border rounded-lg shadow-sm lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0
+  @apply flex flex-col w-full p-8 mx-auto bg-gray-50 border rounded-lg shadow-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0
 }
 .largeInnerFormContainer{
-  @apply flex flex-col w-full p-8 mx-auto bg-gray-100 border rounded-lg shadow-sm md:w-1/2 md:ml-auto md:mt-0
+  @apply flex flex-col w-full p-8 mx-auto bg-gray-50 border rounded-lg shadow-lg md:w-1/2 md:ml-auto md:mt-0
 }
 
 
-.bg-sidebar { background: #3d68ff; }
-.active-nav-link { background: #1947ee; }
-.nav-item:hover { background: #1947ee; }
+.active-nav-link { @apply border-r-4 border-l-4 border-blue-500}
+.nav-item:hover { 
+  @apply bg-blue-700 text-white transition ease-out duration-300
+}

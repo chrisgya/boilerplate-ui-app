@@ -41,9 +41,9 @@ const VerifyAccount = () => {
 
             </div>
 
-            <div className="flex justify-center text-base text-white">
+            <div className="flex justify-center text-base">
                 <div>
-                    <p className="block mt-2"><Link to="/login" className="font-bold">Go Back To Login</Link></p>
+                    <p className="block mt-2"><Link to="/login" className="font-bold text-blue-500">Go Back To Login</Link></p>
                 </div>
             </div>
         </FormLayout>

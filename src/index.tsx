@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { Provider } from 'jotai';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import './index.css';
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Provider>
         <App />
       </Provider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </Router>,
   document.getElementById('root')

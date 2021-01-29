@@ -24,7 +24,7 @@ const App = () => {
         <PrivateRoute exact path="/change-password" component={ChangePassword} />
         {/* <PrivateRoute path="/activities/:id" component={ActivityDetails} /> */}
         {/* <PrivateRoute key={location.key} path={["/createActivity", "/manage/:id"]} component={ActivityForm} /> */}
-        <PrivateRoute path="/profile/:username" component={Profile} />
+        <PrivateRoute path="/profile/:id" component={Profile} />
         <Route component={NotFound} />
       </Switch>
 
