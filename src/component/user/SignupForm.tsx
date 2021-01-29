@@ -112,10 +112,10 @@ const SignupForm = () => {
 
                         <div className="flex flex-wrap -mx-3">
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="password" type="password" ref={methods.register} label="Password" disabled={mutation.isLoading} />
+                                <Input name="password" type="password" ref={methods.register} label="Password" topClass="top-9" disabled={mutation.isLoading} />
                             </div>
                             <div className="w-full px-3 md:w-1/2">
-                                <Input name="confirmPassword" type="password" ref={methods.register} label="Confirm Password" disabled={mutation.isLoading} />
+                                <Input name="confirmPassword" type="password" ref={methods.register} label="Confirm Password" topClass="top-9" disabled={mutation.isLoading} />
                             </div>
                         </div>
 

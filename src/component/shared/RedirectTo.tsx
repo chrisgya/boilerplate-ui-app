@@ -2,5 +2,5 @@ import { history } from "../..";
 
 export const RedirectTo = (location: any) => {
   const { from } = (location?.state as any) || { from: { pathname: "/" } };
-  history.push(from);
+  history.replace(from);
 };

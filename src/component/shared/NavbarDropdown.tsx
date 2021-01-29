@@ -4,7 +4,7 @@ import { logout } from '../../common/utils/helper';
 
 const NavbarDropdown = () => {
   const history = useHistory();
-  const dropdownRef = React.useRef(null);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
 
   const navigate = (url: string) => {
@@ -13,8 +13,8 @@ const NavbarDropdown = () => {
   }
 
   const handleClickAway = (e: MouseEvent) => {
-    const el: any = dropdownRef.current;
-    if (el && !el.contains(e.target)) {
+    const el = dropdownRef.current;
+    if (el && !el.contains(e.target as any)) {
       setIsOpen(false);
     }
   };
@@ -25,7 +25,7 @@ const NavbarDropdown = () => {
   });
 
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button onClick={() => setIsOpen(prv => !prv)} className="p-1 bg-gray-200 rounded-full focus:outline-none focus:ring">
         <img
           className="object-cover w-8 h-8 rounded-full"
@@ -38,7 +38,7 @@ const NavbarDropdown = () => {
       <div className="absolute right-0 p-1 bg-green-400 border border-white rounded-full bottom-3"></div>
 
       {/* Dropdown card  */}
-      {isOpen && <div ref={dropdownRef} className="absolute z-10 mt-3 transform -translate-x-40 bg-white rounded-md shadow-lg xs:translate-x-0 min-w-max">
+      {isOpen && <div className="absolute z-10 mt-3 transform -translate-x-40 bg-white rounded-md shadow-lg xs:translate-x-0 min-w-max">
         <div className="flex flex-col p-4 space-y-1 font-medium border-b">
           <span className="text-gray-800">Christian Gyaban</span>
           <span className="text-sm text-gray-400">chrisgya500@gmail.com</span>
