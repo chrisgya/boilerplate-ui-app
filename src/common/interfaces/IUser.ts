@@ -5,8 +5,10 @@ export interface IUser {
     email: string;
     firstName: string;
     middleName: string;
-    lastname: string;
+    lastName: string;
     pictureUrl: string;
+    createdAt: Date,
+    lastUpdatedAt: Date,
     authorities: string[];
 }
 

@@ -1,16 +1,13 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { logout } from '../../common/utils/helper';
+import useMe from '../hooks/useMe';
+import userSvg from './svg/user.svg';
 
 const NavbarDropdown = () => {
-  const history = useHistory();
   const dropdownRef = React.useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
-
-  const navigate = (url: string) => {
-    setIsOpen(prv => !prv);
-    history.push(url);
-  }
+  const { isSuccess, data } = useMe();
 
   const handleClickAway = (e: MouseEvent) => {
     const el = dropdownRef.current;
@@ -29,8 +26,8 @@ const NavbarDropdown = () => {
       <button onClick={() => setIsOpen(prv => !prv)} className="p-1 bg-gray-200 rounded-full focus:outline-none focus:ring">
         <img
           className="object-cover w-8 h-8 rounded-full"
-          src="https://avatars.githubusercontent.com/u/16061821?s=400&u=aab14f5e3df367d10565ce115becc1cb2298cba3&v=4"
-          alt="CG"
+          src={isSuccess && data?.pictureUrl ? data?.pictureUrl : userSvg}
+          alt=""
         />
       </button>
       {/* green dot  */}
@@ -39,16 +36,20 @@ const NavbarDropdown = () => {
 
       {/* Dropdown card  */}
       {isOpen && <div className="absolute z-10 mt-3 transform -translate-x-40 bg-white rounded-md shadow-lg xs:translate-x-0 min-w-max">
-        <div className="flex flex-col p-4 space-y-1 font-medium border-b">
-          <span className="text-gray-800">Christian Gyaban</span>
+        {isSuccess && <NavLink exact to="/profile/me" activeClassName="active-nav-link" className="flex flex-col p-4 space-y-1 font-medium border-b">
+          <span className="text-gray-800">{`${data?.firstName} ${data?.lastName}`}</span>
           <span className="text-sm text-gray-400">chrisgya500@gmail.com</span>
-        </div>
+        </NavLink>}
         <ul className="flex flex-col p-2 my-2 space-y-1">
           <li>
-            <span onClick={() => navigate('/profile/1')} className="block px-2 py-1 transition rounded-md cursor-pointer hover:bg-gray-100">Profile</span>
+            <NavLink exact to="/to some where" activeClassName="active-nav-link" className="block px-2 py-1 transition rounded-md cursor-pointer hover:bg-gray-100">
+              Another link
+                </NavLink>
           </li>
           <li>
-            <span onClick={() => navigate('/change-password')} className="block px-2 py-1 transition rounded-md cursor-pointer hover:bg-gray-100">Change Password</span>
+            <NavLink exact to="/change-password" activeClassName="active-nav-link" className="block px-2 py-1 transition rounded-md cursor-pointer hover:bg-gray-100">
+              Change Password
+                </NavLink>
           </li>
         </ul>
         <div className="flex items-center justify-center p-4 text-blue-700 underline border-t">

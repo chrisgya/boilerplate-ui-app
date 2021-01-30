@@ -19,14 +19,13 @@ axios.interceptors.request.use(
 );
 
 axios.interceptors.response.use(undefined, (error) => {
+
   if (error.message === "Network Error" && !error.response) {
     toast.error("Network error - make sure API is running!");
   } else {
     // const { status, data, config, headers } = error.response;
     const status = error?.response?.status;
-    if (
-      status === 401 // &&   headers["www-authenticate"] === 'Bearer error="invalid_token", error_description="The token is expired"'
-    ) {
+    if (status === 401) {
       logout();
       toast.info("Your session has expired, please login again");
     }
@@ -62,7 +61,7 @@ const requests = {
 };
 
 const User = {
-  current: (): Promise<IUser> => requests.get("/users/me"),
+  me: (): Promise<IUser> => requests.get("/users/me"),
   changePassword: (req: IChangePasswordRequest): Promise<void> => requests.post(`/users/change-password`, req),
   login: (req: ILoginRequest): Promise<ILoginResponse> => requests.post(`/auth/login`, req),
   refreshToken: (token: string): Promise<ILoginResponse> => requests.get(`/auth/refresh-token/${token}`),

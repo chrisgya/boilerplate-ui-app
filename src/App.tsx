@@ -1,16 +1,18 @@
 import React from 'react';
-import { Route, Switch, } from 'react-router-dom';
+import { Route, Switch, useLocation, } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
+import ReactTooltip from 'react-tooltip';
 import Home from './component/home/Home';
 import { NotFound, PrivateRoute } from './component/shared';
 import { ChangePassword, ForgotPassword, Login, Profile, ResetPassword, Signup, VerifyAccount } from './component/user';
 
 
 const App = () => {
+  const location = useLocation();
   return (
     <div>
       <ToastContainer position="bottom-right" />
-
+      <ReactTooltip />
 
       <Switch>
         <PrivateRoute exact path="/" component={Home} />
@@ -23,8 +25,7 @@ const App = () => {
 
         <PrivateRoute exact path="/change-password" component={ChangePassword} />
         {/* <PrivateRoute path="/activities/:id" component={ActivityDetails} /> */}
-        {/* <PrivateRoute key={location.key} path={["/createActivity", "/manage/:id"]} component={ActivityForm} /> */}
-        <PrivateRoute path="/profile/:id" component={Profile} />
+        <PrivateRoute key={location.key} path={["/profile", "/profile/:id"]} component={Profile} />
         <Route component={NotFound} />
       </Switch>
 

@@ -51,7 +51,7 @@ cursor: pointer;
 }
 
 
-.active-nav-link { @apply border-r-4 border-l-4 border-blue-500}
+.active-nav-link { @apply border-r  border-blue-500 }
 .nav-item:hover { 
   @apply bg-blue-700 text-white transition ease-out duration-300
 }

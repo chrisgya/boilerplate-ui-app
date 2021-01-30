@@ -1,5 +1,6 @@
 ---
 ### https://heroicons.com
+### https://materialdesignicons.com/
 
 ### https://github.com/pmndrs/jotai
 

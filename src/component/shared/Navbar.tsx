@@ -5,11 +5,12 @@ import NavbarDropdown from './NavbarDropdown';
 
 const Navbar = () => {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
+
     return (<nav className="relative flex flex-wrap items-center justify-between px-2 py-3 text-gray-600 bg-white shadow-md">
         <div className="container flex flex-wrap items-center justify-between px-4 mx-auto">
             <div className="relative flex justify-between w-full sm:w-auto sm:static sm:block sm:justify-start">
                 <Link to="/" className="inline-block py-2 mr-4 text-sm font-bold leading-relaxed uppercase whitespace-no-wrap">
-                    Chrisgya Company
+                    Chrisgya
                         </Link>
                 <button className="block px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer sm:hidden focus:outline-none"
                     type="button" onClick={() => setNavbarOpen(prv => !prv)}>
