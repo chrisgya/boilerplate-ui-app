@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import agent from "../../api/agent";
-import { ME } from "../../common/utils/constants";
+import { ME } from "../../utils/constants";
 
 const useMe = () => {
   const { isSuccess, data, isError, error } = useQuery(ME, agent.User.me);

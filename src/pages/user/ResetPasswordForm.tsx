@@ -1,16 +1,16 @@
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from 'react-hook-form';
-import { resetPasswordSchema } from '../../common/validations';
-import { Button, Input } from '../../common/formControls';
-import FormLayout from '../../common/Layout/FormLayout';
+import { resetPasswordSchema } from '../../validations';
+import { Button, Input } from '../../components/formControls';
+import FormLayout from '../../components/Layout/FormLayout';
 import { useMutation } from 'react-query';
 import agent from '../../api/agent';
 import { toast } from 'react-toastify';
-import FormTitleAndError from '../../common/Layout/FormTitleAndError';
+import FormTitleAndError from '../../components/Layout/FormTitleAndError';
 import { AxiosResponse } from 'axios';
-import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
-import { IResetPasswordRequest } from '../../common/interfaces/IUser';
+import { IErrorMessage } from '../../interfaces/IErrorMessage';
+import { IResetPasswordRequest } from '../../interfaces/IUser';
 
 const defaultValues = {
     token: '',

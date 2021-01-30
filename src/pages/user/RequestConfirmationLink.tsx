@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import agent from '../../api/agent';
-import { Button } from '../../common/formControls';
-import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
+import { Button } from '../../components/formControls';
+import { IErrorMessage } from '../../interfaces/IErrorMessage';
 
 type emailType = { email: string }
 

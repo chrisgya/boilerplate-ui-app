@@ -2,16 +2,16 @@ import { Link, useHistory } from 'react-router-dom'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from 'react-hook-form';
 import React, { useRef } from 'react';
-import { createUserSchema } from '../../common/validations';
-import { Button, Input } from '../../common/formControls';
-import FormLayout from '../../common/Layout/FormLayout';
+import { createUserSchema } from '../../validations';
+import { Button, Input } from '../../components/formControls';
+import FormLayout from '../../components/Layout/FormLayout';
 import { useMutation } from 'react-query';
 import agent from '../../api/agent';
 import { toast } from 'react-toastify';
 import { AxiosResponse } from 'axios';
-import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
-import FormTitleAndError from '../../common/Layout/FormTitleAndError';
-import { ISignupRequest } from '../../common/interfaces/IUser';
+import { IErrorMessage } from '../../interfaces/IErrorMessage';
+import FormTitleAndError from '../../components/Layout/FormTitleAndError';
+import { ISignupRequest } from '../../interfaces/IUser';
 
 const defaultValues = {
     username: '',

@@ -1,17 +1,17 @@
 import React from 'react'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from 'react-hook-form';
-import { IChangePasswordRequest } from '../../common/interfaces/IUser';
-import { changePasswordSchema } from '../../common/validations';
+import { IChangePasswordRequest } from '../../interfaces/IUser';
+import { changePasswordSchema } from '../../validations';
 import agent from '../../api/agent';
 import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';
-import { logout } from '../../common/utils/helper';
+import { logout } from '../../utils/helper';
 import { AxiosResponse } from 'axios';
-import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
-import FormLayout from '../../common/Layout/FormLayout';
-import FormTitleAndError from '../../common/Layout/FormTitleAndError';
-import { Button, Input } from '../../common/formControls';
+import { IErrorMessage } from '../../interfaces/IErrorMessage';
+import FormLayout from '../../components/Layout/FormLayout';
+import FormTitleAndError from '../../components/Layout/FormTitleAndError';
+import { Button, Input } from '../../components/formControls';
 
 const defaultValues = {
     password: '',

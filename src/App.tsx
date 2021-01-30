@@ -2,9 +2,8 @@ import React from 'react';
 import { Route, Switch, useLocation, } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import ReactTooltip from 'react-tooltip';
-import Home from './component/home/Home';
-import { NotFound, PrivateRoute } from './component/shared';
-import { ChangePassword, ForgotPassword, Login, Profile, ResetPassword, Signup, VerifyAccount } from './component/user';
+import { Home, ChangePassword, ForgotPassword, Login, Profile, ResetPassword, Signup, VerifyAccount, NotFound } from './pages';
+import { PrivateRoute } from './components/routes/PrivateRoute';
 
 
 const App = () => {

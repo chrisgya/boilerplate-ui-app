@@ -1,8 +1,8 @@
 import { useAtom } from "jotai";
 import React from "react";
 import { RouteProps, RouteComponentProps, Route, Redirect } from "react-router-dom";
-import { SideBar, Navbar } from ".";
-import { isLoginAtom } from "../../store/userAtom";
+import { SideBar, Navbar } from "../shared";
+import { isLoginAtom } from "../../stores/userAtom";
 
 interface IProps extends RouteProps {
   component: React.ComponentType<RouteComponentProps<any>>;

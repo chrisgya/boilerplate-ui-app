@@ -1,6 +1,6 @@
 import React from 'react'
 import cx from "classnames";
-import { CloseIcon, MenuIcon } from '././svg/icons'
+import { CloseIcon, MenuIcon } from './svg/icons'
 import { Link, NavLink } from 'react-router-dom';
 import { HomeIcon } from './svg/icons';
 

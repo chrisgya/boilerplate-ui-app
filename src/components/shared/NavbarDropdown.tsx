@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { logout } from '../../common/utils/helper';
+import { logout } from '../../utils/helper';
 import useMe from '../hooks/useMe';
 import userSvg from './svg/user.svg';
 

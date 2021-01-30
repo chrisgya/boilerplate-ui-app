@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import cx from "classnames";
 import { useFormContext } from "react-hook-form";
-import { EyeIcon, EyeOffIcon } from "../../component/shared/svg/icons";
+import { EyeIcon, EyeOffIcon } from "../shared/svg/icons";
 
 type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   label?: string;

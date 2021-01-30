@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { IChangePasswordRequest, IUser, ILoginRequest, ILoginResponse, IResetPasswordRequest, ISignupRequest } from "../common/interfaces/IUser";
-import { ACCESS_TOKEN } from "../common/utils/constants";
-import { logout } from "../common/utils/helper";
+import { IChangePasswordRequest, IUser, ILoginRequest, ILoginResponse, IResetPasswordRequest, ISignupRequest } from "../interfaces/IUser";
+import { ACCESS_TOKEN } from "../utils/constants";
+import { logout } from "../utils/helper";
 
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;

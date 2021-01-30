@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants";
-import { history } from "../..";
+import { history } from "..";
 
 export const decodeToken = (token: string) => jwt_decode(token);
 

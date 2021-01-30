@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import cx from "classnames";
-import Spin from "../../component/shared/svg/Spin";
+import Spin from "../shared/svg/Spin";
 
 type IButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   useHalfWith?: boolean;

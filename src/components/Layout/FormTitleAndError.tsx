@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 import React from 'react'
 import { UseMutationResult } from 'react-query';
-import { ErrorMessage } from '../../component/shared';
-import { RequestConfirmationLink } from '../../component/user';
-import { IErrorMessage } from '../interfaces/IErrorMessage';
+import { ErrorMessage } from '../shared';
+import { RequestConfirmationLink } from '../../pages';
+import { IErrorMessage } from '../../interfaces/IErrorMessage';
 
 type propType = {
     title: string,

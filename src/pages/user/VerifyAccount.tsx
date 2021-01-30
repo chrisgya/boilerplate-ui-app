@@ -1,13 +1,13 @@
 import { Link, useHistory, useParams } from 'react-router-dom'
 import React, { useCallback, useEffect } from 'react';
-import FormLayout from '../../common/Layout/FormLayout';
+import FormLayout from '../../components/Layout/FormLayout';
 import agent from '../../api/agent';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
-import FormTitleAndError from '../../common/Layout/FormTitleAndError';
+import FormTitleAndError from '../../components/Layout/FormTitleAndError';
 import { AxiosResponse } from 'axios';
-import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
-import Spin from '../shared/svg/Spin';
+import { IErrorMessage } from '../../interfaces/IErrorMessage';
+import Spin from '../../components/shared/svg/Spin';
 
 const VerifyAccount = () => {
 

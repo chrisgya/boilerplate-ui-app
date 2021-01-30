@@ -2,19 +2,19 @@ import { Link, useLocation } from 'react-router-dom'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from 'react-hook-form';
 import React, { useRef } from 'react';
-import { loginSchema } from '../../common/validations';
-import { Button, Input } from '../../common/formControls';
-import FormLayout from '../../common/Layout/FormLayout';
+import { loginSchema } from '../../validations';
+import { Button, Input } from '../../components/formControls';
+import FormLayout from '../../components/Layout/FormLayout';
 import agent from '../../api/agent';
 import { useMutation } from 'react-query';
-import { RedirectTo } from '../shared';
 import { useAtom } from 'jotai';
-import { isLoginAtom } from '../../store/userAtom';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../common/utils/constants';
+import { isLoginAtom } from '../../stores/userAtom';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../utils/constants';
 import { AxiosResponse } from 'axios';
-import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
-import FormTitleAndError from '../../common/Layout/FormTitleAndError';
-import { ILoginRequest } from '../../common/interfaces/IUser';
+import { IErrorMessage } from '../../interfaces/IErrorMessage';
+import FormTitleAndError from '../../components/Layout/FormTitleAndError';
+import { ILoginRequest } from '../../interfaces/IUser';
+import { RedirectTo } from '../../components/routes/RedirectTo';
 const defaultValues = {
     email: '',
     password: ''

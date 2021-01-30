@@ -2,15 +2,15 @@ import { Link, useHistory } from 'react-router-dom'
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from 'react-hook-form';
 import React from 'react';
-import { emailSchema } from '../../common/validations';
-import { Button, Input } from '../../common/formControls';
-import FormLayout from '../../common/Layout/FormLayout';
+import { emailSchema } from '../../validations';
+import { Button, Input } from '../../components/formControls';
+import FormLayout from '../../components/Layout/FormLayout';
 import { useMutation } from 'react-query';
 import agent from '../../api/agent';
 import { toast } from 'react-toastify';
 import { AxiosResponse } from 'axios';
-import { IErrorMessage } from '../../common/interfaces/IErrorMessage';
-import FormTitleAndError from '../../common/Layout/FormTitleAndError';
+import { IErrorMessage } from '../../interfaces/IErrorMessage';
+import FormTitleAndError from '../../components/Layout/FormTitleAndError';
 
 interface IForgotPassword {
     email: string;
