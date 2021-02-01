@@ -26,7 +26,7 @@ const NavbarDropdown = () => {
       <button onClick={() => setIsOpen(prv => !prv)} className="p-1 bg-gray-200 rounded-full focus:outline-none focus:ring">
         <img
           className="object-cover w-8 h-8 rounded-full"
-          src={isSuccess && data?.pictureUrl ? data?.pictureUrl : userSvg}
+          src={isSuccess && data?.pictureUrl ? `${process.env.REACT_APP_FILE_PREVIEW_URL}/${data?.pictureUrl}` : userSvg}
           alt=""
         />
       </button>

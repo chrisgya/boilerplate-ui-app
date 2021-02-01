@@ -1,10 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import Dropzone from "react-dropzone";
 
 type FileInputProps = React.DetailedHTMLProps<any, any> & {
   name: string;
   setFiles: (files: object[]) => void;
+  files: any[];
   disabled?: boolean;
 };
 
@@ -21,8 +22,28 @@ const dropzoneActive = {
   borderColor: "green",
 };
 
-const FileInput: FC<FileInputProps> = ({ name }) => {
+const FileInput: FC<FileInputProps> = ({ name, files, setFiles, disabled }) => {
   const { control } = useFormContext();
+
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file: object) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+    },
+    [setFiles]
+  );
+
+  useEffect(() => {
+    return () => {
+      files && files.forEach((file: { preview: string; }) => URL.revokeObjectURL(file.preview));
+    };
+  });
+
 
   return (
     <div className="field">
@@ -30,15 +51,15 @@ const FileInput: FC<FileInputProps> = ({ name }) => {
         control={control}
         name={name}
         defaultValue={[]}
-        render={({ onChange, onBlur, value }) => (
+        render={({ onBlur, value }) => (
           <>
-            <Dropzone onDrop={onChange}>
+            <Dropzone onDrop={onDrop}>
               {({ isDragActive, getRootProps, getInputProps }) => (
                 <div
                   {...getRootProps()}
                   style={isDragActive ? { ...dropzoneStyles, ...dropzoneActive } : dropzoneStyles}
                 >
-                  <input {...getInputProps()} name={name} onBlur={onBlur} />
+                  <input {...getInputProps()} name={name} onBlur={onBlur} disabled={disabled} />
                   <p>Drag 'n' drop files here, or click to select files</p>
                 </div>
               )}

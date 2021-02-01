@@ -53,12 +53,9 @@ const requests = {
   post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
   put: (url: string, body: {}) => axios.put(url, body).then(responseBody),
   del: (url: string) => axios.delete(url).then(responseBody),
-  postForm: (url: string, file: Blob) => {
-    const formData = new FormData();
-    formData.append("File", file);
-    return axios.post(url, formData, { headers: { "Content-type": "multipart/form-data" } }).then(responseBody);
-  },
+  postForm: (url: string, formData: FormData) => axios.post(url, formData, { headers: { "Content-type": "multipart/form-data" } }).then(responseBody)
 };
+
 
 const User = {
   me: (): Promise<IUser> => requests.get("/users/me"),
@@ -72,6 +69,7 @@ const User = {
   forgotPassword: (email: string): Promise<void> => requests.put(`/auth/forgot-password/${email}`, {}),
   requestConfirmationLink: (email: string): Promise<void> => requests.put(`/auth/request-confirmation-link/${email}`, {}),
   resetPassword: (req: IResetPasswordRequest): Promise<void> => requests.put(`/auth/reset-password/${req.token}`, req),
+  uploadPhoto: (formData: FormData): Promise<IUser> => requests.postForm(`/users/me/photo`, formData),
 };
 
 

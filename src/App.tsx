@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, useLocation, } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import ReactTooltip from 'react-tooltip';
-import { Home, ChangePassword, ForgotPassword, Login, Profile, ResetPassword, Signup, VerifyAccount, NotFound } from './pages';
+import { Home, ChangePassword, ForgotPassword, Login, ResetPassword, Signup, VerifyAccount, NotFound, ProfilePage } from './pages';
 import { PrivateRoute } from './components/routes/PrivateRoute';
 
 
@@ -24,7 +24,7 @@ const App = () => {
 
         <PrivateRoute exact path="/change-password" component={ChangePassword} />
         {/* <PrivateRoute path="/activities/:id" component={ActivityDetails} /> */}
-        <PrivateRoute key={location.key} path={["/profile", "/profile/:id"]} component={Profile} />
+        <PrivateRoute key={location.key} path={["/profile", "/profile/:id"]} component={ProfilePage} />
         <Route component={NotFound} />
       </Switch>
 

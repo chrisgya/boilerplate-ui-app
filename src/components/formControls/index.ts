@@ -9,4 +9,5 @@ export { MyDatePicker } from "./DatePicker";
 export { MyTimePicker } from "./MyTimePicker";
 export { InputFormat } from "./InputFormat";
 export { CustomSelect } from "./CustomSelect";
+export { ImageCropper } from "./ImageCropper";
 export { Button } from './Button';

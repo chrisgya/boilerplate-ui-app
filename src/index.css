@@ -55,3 +55,13 @@ cursor: pointer;
 .nav-item:hover { 
   @apply bg-blue-700 text-white transition ease-out duration-300
 }
+
+.profile-side-bar{
+  @apply cursor-pointer transform transition duration-500 ease-in-out bg-gradient-to-r bg-white  p-2 m-1 text-center shadow-sm
+}
+.profile-side-bar:hover{
+  @apply from-blue-300 to-blue-700 font-bold text-white
+}
+.profile-side-bar-active{
+  @apply border-l-2 border-blue-500 rounded-tl-full rounded-bl-full
+}

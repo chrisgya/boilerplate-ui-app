@@ -4,7 +4,7 @@ import Spin from "../shared/svg/Spin";
 
 type IButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   useHalfWith?: boolean;
-  isBusy: boolean;
+  isBusy?: boolean;
 };
 
 export const Button: FC<IButtonProps> = ({ name, type, onClick, useHalfWith, isBusy, ...rest }) => {
