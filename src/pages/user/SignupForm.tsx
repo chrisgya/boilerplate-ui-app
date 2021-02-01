@@ -35,7 +35,7 @@ const SignupForm = () => {
         defaultValues
     });
 
-    const mutation = useMutation(agent.User.signup, {
+    const mutation = useMutation(agent.Account.signup, {
         onSuccess: (data) => {
             console.log('created user', data)
             toast.success("Account successfully created. Email sent to registered email address for verification!");
@@ -47,7 +47,7 @@ const SignupForm = () => {
         }
     });
 
-    const usernameMutation = useMutation(agent.User.checkUsernameExist, {
+    const usernameMutation = useMutation(agent.Account.checkUsernameExist, {
         onSuccess: (data) => {
             if (!!data) {
                 methods.setValue("username", null);
@@ -57,7 +57,7 @@ const SignupForm = () => {
         }
     });
 
-    const emailMutation = useMutation(agent.User.checkEmailExist, {
+    const emailMutation = useMutation(agent.Account.checkEmailExist, {
         onSuccess: (data) => {
             if (!!data) {
                 methods.setValue("email", null);

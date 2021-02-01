@@ -57,9 +57,7 @@ const requests = {
 };
 
 
-const User = {
-  me: (): Promise<IUser> => requests.get("/users/me"),
-  changePassword: (req: IChangePasswordRequest): Promise<void> => requests.post(`/users/change-password`, req),
+const Account = {
   login: (req: ILoginRequest): Promise<ILoginResponse> => requests.post(`/auth/login`, req),
   refreshToken: (token: string): Promise<ILoginResponse> => requests.get(`/auth/refresh-token/${token}`),
   signup: (user: ISignupRequest): Promise<IUser> => requests.post(`/auth/signup`, user),
@@ -69,6 +67,13 @@ const User = {
   forgotPassword: (email: string): Promise<void> => requests.put(`/auth/forgot-password/${email}`, {}),
   requestConfirmationLink: (email: string): Promise<void> => requests.put(`/auth/request-confirmation-link/${email}`, {}),
   resetPassword: (req: IResetPasswordRequest): Promise<void> => requests.put(`/auth/reset-password/${req.token}`, req),
+};
+
+
+
+const User = {
+  me: (): Promise<IUser> => requests.get("/users/me"),
+  changePassword: (req: IChangePasswordRequest): Promise<void> => requests.post(`/users/change-password`, req),
   uploadPhoto: (formData: FormData): Promise<IUser> => requests.postForm(`/users/me/photo`, formData),
 };
 
@@ -102,6 +107,7 @@ const User = {
 const agent = {
   // Activities,
   User,
+  Account,
   // Profiles,
 };
 

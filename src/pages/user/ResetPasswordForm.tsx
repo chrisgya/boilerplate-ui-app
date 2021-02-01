@@ -28,7 +28,7 @@ const ResetPasswordForm = () => {
         defaultValues
     });
 
-    const mutation = useMutation(agent.User.resetPassword, {
+    const mutation = useMutation(agent.Account.resetPassword, {
         onSuccess: (_data) => {
             toast.success("Password successfully created. You can login now!");
             history.push('/login');

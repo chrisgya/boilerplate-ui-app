@@ -15,7 +15,7 @@ const RequestConfirmationLink = (prop: emailType) => {
 
     const methods = useForm();
 
-    const mutation = useMutation(agent.User.requestConfirmationLink, {
+    const mutation = useMutation(agent.Account.requestConfirmationLink, {
         onSuccess: (_data) => {
             toast.success("Confirmation link sent to registered email address!");
         },

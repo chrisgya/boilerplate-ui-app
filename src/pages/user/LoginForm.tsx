@@ -31,7 +31,7 @@ const LoginForm = () => {
         defaultValues
     });
 
-    const mutation = useMutation(agent.User.login, {
+    const mutation = useMutation(agent.Account.login, {
         onSuccess: (data) => {
             window.sessionStorage.setItem(ACCESS_TOKEN, data.accessToken);
             window.sessionStorage.setItem(REFRESH_TOKEN, data.refreshToken);

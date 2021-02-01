@@ -26,7 +26,7 @@ const ForgetPasswordForm = () => {
         defaultValues
     });
 
-    const mutation = useMutation(agent.User.forgotPassword, {
+    const mutation = useMutation(agent.Account.forgotPassword, {
         onSuccess: (_data) => {
             toast.success("Email sent to registered email address!");
             history.push('/login');

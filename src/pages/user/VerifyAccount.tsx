@@ -14,7 +14,7 @@ const VerifyAccount = () => {
     const history = useHistory();
     const { token } = useParams<{ token: string }>();
 
-    const { mutate, isLoading } = useMutation(agent.User.verifyAccount, {
+    const { mutate, isLoading } = useMutation(agent.Account.verifyAccount, {
         onSuccess: (_data) => {
             toast.success("Account successfully verified!");
             history.push('/login');
