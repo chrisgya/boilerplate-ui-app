@@ -120,7 +120,7 @@ const SignupForm = () => {
                         </div>
 
                         <div className="flex justify-center">
-                            <Button type="submit" name="Create Account" isBusy={mutation.isLoading} />
+                            <Button type="submit" name="Create Account" isBusy={mutation.isLoading} disabled={mutation.isLoading || Object.keys(methods.formState.dirtyFields).length < 1} />
                         </div>
                         <p className="block mt-4 text-xs">By clicking the <i className="font-bold">"Create Account"</i> button, you agree to Chrisgya’s <Link to="/login" className="font-bold text-blue-500">terms of acceptable use</Link></p>
 

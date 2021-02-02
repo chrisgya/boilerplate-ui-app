@@ -1,28 +1,18 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import cx from "classnames";
 import Dropzone from "react-dropzone";
 
 type FileInputProps = React.DetailedHTMLProps<any, any> & {
   name: string;
   setFiles: (files: object[]) => void;
   files: any[];
+  label?: string;
   disabled?: boolean;
 };
 
-const dropzoneStyles = {
-  border: "dashed 3px",
-  borderColor: "#eee",
-  borderRadius: "5px",
-  paddingTop: "30px",
-  textAlign: "center" as "center",
-  height: "75px",
-};
 
-const dropzoneActive = {
-  borderColor: "green",
-};
-
-const FileInput: FC<FileInputProps> = ({ name, files, setFiles, disabled }) => {
+const FileInput = ({ name, files, setFiles, disabled, label, ...rest }: FileInputProps) => {
   const { control } = useFormContext();
 
   const onDrop = useCallback(
@@ -55,12 +45,11 @@ const FileInput: FC<FileInputProps> = ({ name, files, setFiles, disabled }) => {
           <>
             <Dropzone onDrop={onDrop}>
               {({ isDragActive, getRootProps, getInputProps }) => (
-                <div
-                  {...getRootProps()}
-                  style={isDragActive ? { ...dropzoneStyles, ...dropzoneActive } : dropzoneStyles}
+                <div {...getRootProps()}
+                  className={cx("border-dashed border-2 p-5 text-center focus:outline-none font-bold text-gray-400 cursor-pointer rounded-lg", isDragActive && " border-blue-500")}
                 >
-                  <input {...getInputProps()} name={name} onBlur={onBlur} disabled={disabled} />
-                  <p>Drag 'n' drop files here, or click to select files</p>
+                  <input {...getInputProps()} name={name} onBlur={onBlur} disabled={disabled} {...rest} />
+                  <p>{label ? label : `Drag 'n' drop files here, or click to select files`}</p>
                 </div>
               )}
             </Dropzone>

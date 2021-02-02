@@ -53,7 +53,7 @@ const PhotoUpload = ({ clearEditing }: IProp) => {
                 <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
                     <div className="shadow-lg">
                         <span className="text-base text-blue-500 ">Add Photo</span>
-                        <FileInput name="passportPhoto" setFiles={setFiles} disabled={mutation.isLoading} />
+                        <FileInput name="passportPhoto" label="Drag 'n' drop your photo here, or click to select photo" setFiles={setFiles} disabled={mutation.isLoading} />
                     </div>
                     {files.length > 0 && <div className="my-2 shadow-lg">
                         <span className="text-base text-blue-500">Resize Image</span>

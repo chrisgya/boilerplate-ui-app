@@ -1,13 +1,9 @@
 import * as yup from "yup";
 
-import { EmailValidation, PasswordValidation, NameValidation, OptionalNameValidation } from "./shared";
+import { EmailValidation, PasswordValidation, NameValidation, OptionalNameValidation, usernameValidation } from "./shared";
 
 export const createUserSchema = yup.object().shape({
-    username: yup
-        .string()
-        .min(3, "Name should be between 3 and 30 characters long")
-        .max(30, "Name should be between 3 and 30 characters long")
-        .required(),
+    username: usernameValidation,
     email: EmailValidation,
     firstName: NameValidation,
     middleName: OptionalNameValidation,

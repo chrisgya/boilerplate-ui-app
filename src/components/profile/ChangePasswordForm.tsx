@@ -9,9 +9,9 @@ import { useMutation } from 'react-query';
 import { logout } from '../../utils/helper';
 import { AxiosResponse } from 'axios';
 import { IErrorMessage } from '../../interfaces/IErrorMessage';
-import FormLayout from '../../components/Layout/FormLayout';
-import FormTitleAndError from '../../components/Layout/FormTitleAndError';
-import { Button, Input } from '../../components/formControls';
+import FormLayout from '../Layout/FormLayout';
+import FormTitleAndError from '../Layout/FormTitleAndError';
+import { Button, Input } from '../formControls';
 
 const defaultValues = {
     password: '',
@@ -39,7 +39,7 @@ const ChangePasswordForm = () => {
     }
 
     return (<FormLayout hideLogo={true}>
-        <div className="smallInnerFormContainer">
+        <div className="mx-auto shadow-2xl md:w-2/4">
 
             <FormTitleAndError title="CHANGE PASSWORD" mutation={mutation} />
 

@@ -12,6 +12,20 @@ export interface IUser {
     authorities: string[];
 }
 
+export interface IUpdateUserRequest {
+    firstName: string;
+    middleName: string | null;
+    lastName: string;
+}
+
+export interface IEmailRequest {
+    email: string;
+}
+
+export interface IUsernameRequest {
+    username: string;
+}
+
 export interface ISignupRequest {
     username: string;
     email: string;

@@ -46,11 +46,6 @@ const NavbarDropdown = () => {
               Another link
                 </NavLink>
           </li>
-          <li>
-            <NavLink exact to="/change-password" activeClassName="active-nav-link" className="block px-2 py-1 transition rounded-md cursor-pointer hover:bg-gray-100">
-              Change Password
-                </NavLink>
-          </li>
         </ul>
         <div className="flex items-center justify-center p-4 text-blue-700 underline border-t">
           <span className="cursor-pointer" onClick={() => logout()}>Logout</span>

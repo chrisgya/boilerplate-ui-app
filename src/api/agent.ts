@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { IChangePasswordRequest, IUser, ILoginRequest, ILoginResponse, IResetPasswordRequest, ISignupRequest } from "../interfaces/IUser";
+import { IChangePasswordRequest, IUser, ILoginRequest, ILoginResponse, IResetPasswordRequest, ISignupRequest, IUpdateUserRequest, IEmailRequest, IUsernameRequest } from "../interfaces/IUser";
 import { ACCESS_TOKEN } from "../utils/constants";
 import { logout } from "../utils/helper";
 
@@ -73,6 +73,9 @@ const Account = {
 
 const User = {
   me: (): Promise<IUser> => requests.get("/users/me"),
+  updateUser: (req: IUpdateUserRequest): Promise<IUser> => requests.put(`/users/me`, req),
+  changeEmail: (req: IEmailRequest): Promise<void> => requests.post(`/users/change-email`, req),
+  changeUsername: (req: IUsernameRequest): Promise<void> => requests.post(`/users/change-username`, req),
   changePassword: (req: IChangePasswordRequest): Promise<void> => requests.post(`/users/change-password`, req),
   uploadPhoto: (formData: FormData): Promise<IUser> => requests.postForm(`/users/me/photo`, formData),
 };

@@ -30,7 +30,7 @@ const RequestConfirmationLink = (prop: emailType) => {
     });
 
     return (
-        hide ? null : <Button type="button" onClick={() => mutation.mutate(prop.email)} name="Request Confirmation Link" isBusy={mutation.isLoading} />
+        hide ? null : <Button type="button" onClick={() => mutation.mutate(prop.email)} name="Request Confirmation Link" isBusy={mutation.isLoading} disabled={mutation.isLoading} />
 
     )
 }

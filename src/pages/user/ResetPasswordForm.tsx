@@ -53,7 +53,7 @@ const ResetPasswordForm = () => {
                         <Input name="confirmPassword" type="password" ref={methods.register} placeholder="Confirm Password" disabled={mutation.isLoading} />
 
                         <div className="flex justify-center">
-                            <Button type="submit" name="Create Password" isBusy={mutation.isLoading} />
+                            <Button type="submit" name="Create Password" isBusy={mutation.isLoading} disabled={mutation.isLoading || Object.keys(methods.formState.dirtyFields).length < 1} />
                         </div>
                     </form>
                 </FormProvider>
