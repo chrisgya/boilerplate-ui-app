@@ -1,5 +1,5 @@
 import React from 'react'
-import { PhotoUpload, ChangePasswordForm, DetailsForm, UsernameForm, EmailForm } from '../../components/profile';
+import { PhotoUpload, ChangePasswordForm, DetailsForm, UsernameForm, EmailForm, UserRoles } from '../../components/profile';
 import TabHeader from '../../components/tab/TabHeader';
 import cx from "classnames";
 import useMe from '../../components/hooks/useMe';
@@ -46,7 +46,7 @@ function ProfilePage() {
                                             }
                                         </div>}
                                         {profileSideBar === 2 && <div><UsernameForm /> <EmailForm /> <DetailsForm /></div>}
-                                        {profileSideBar === 3 && <div>Roles & Permissions</div>}
+                                        {profileSideBar === 3 && <div><UserRoles /></div>}
                                         {profileSideBar === 4 && <div><ChangePasswordForm /></div>}
 
                                     </div>

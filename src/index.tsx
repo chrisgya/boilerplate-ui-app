@@ -5,7 +5,7 @@ import { createBrowserHistory } from "history";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { Provider } from 'jotai';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import './index.css';
+import './assets/styles/index.css';
 import "react-toastify/dist/ReactToastify.min.css";
 import App from './App';
 import reportWebVitals from './reportWebVitals';

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { IChangePasswordRequest, IUser, ILoginRequest, ILoginResponse, IResetPasswordRequest, ISignupRequest, IUpdateUserRequest, IEmailRequest, IUsernameRequest } from "../interfaces/IUser";
+import { IChangePasswordRequest, IUser, ILoginRequest, ILoginResponse, IResetPasswordRequest, ISignupRequest, IUpdateUserRequest, IEmailRequest, IUsernameRequest, IRole, IPermission } from "../interfaces/IUser";
 import { ACCESS_TOKEN } from "../utils/constants";
 import { logout } from "../utils/helper";
 
@@ -73,6 +73,7 @@ const Account = {
 
 const User = {
   me: (): Promise<IUser> => requests.get("/users/me"),
+  currentUserRoles: (): Promise<IRole[]> => requests.get("/users/me/roles"),
   updateUser: (req: IUpdateUserRequest): Promise<IUser> => requests.put(`/users/me`, req),
   changeEmail: (req: IEmailRequest): Promise<void> => requests.post(`/users/change-email`, req),
   changeUsername: (req: IUsernameRequest): Promise<void> => requests.post(`/users/change-username`, req),
@@ -80,6 +81,9 @@ const User = {
   uploadPhoto: (formData: FormData): Promise<IUser> => requests.postForm(`/users/me/photo`, formData),
 };
 
+const Role = {
+  getRolePermissions: (roleId: number): Promise<IPermission[]> => requests.get(`/roles/${roleId}/permissions`),
+};
 
 // const Activities = {
 //   list: (params: URLSearchParams): Promise<IActivitiesEnvelope> =>
@@ -111,6 +115,7 @@ const agent = {
   // Activities,
   User,
   Account,
+  Role,
   // Profiles,
 };
 
