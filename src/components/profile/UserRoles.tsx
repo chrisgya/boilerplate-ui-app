@@ -7,7 +7,7 @@ import { Table } from "../shared";
 
 //type:'text|number|currency|date|hyperlink|image'
 const headers = [{ key: 'name', title: 'Role Name', type: 'text' }, { key: 'description', title: 'Role Description', type: 'text' }, { key: 'createdBy', title: 'Created By', type: 'text' }, { key: 'createdAt', title: 'Created At', type: 'date' }]
-const permissionsHeaders = [{ key: 'name', title: 'Permission Name', type: 'text' }, { key: 'description', title: 'Permission Description', type: 'text' }, { key: 'createdBy', title: 'Created By', type: 'text' }, { key: 'createdAt', title: 'Created At', type: 'date' }]
+const permissionsHeaders = [{ key: 'name', title: 'Permission Name', type: 'text' }, { key: 'description', title: 'Permission Description', type: 'text' }]
 
 function Roles() {
     const [selectedRow, setSelectedRow] = useState<IRole>()

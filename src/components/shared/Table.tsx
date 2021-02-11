@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import cx from "classnames";
+import { format, parseISO } from "date-fns";
 import '../../assets/styles/table.css';
 import { CloseIcon } from './svg/icons';
 
@@ -75,12 +76,21 @@ const Table = ({ data, headers, title, isMultiSelectable, onMultiSelect, isSelec
         return selectedRows.findIndex(row => JSON.stringify(row) === JSON.stringify(selRow)) > -1 ? true : false;
     }
 
+    const formatData = (type: string, data: any) => {
+        switch (type) {
+            case 'date':
+                return format(parseISO(data), 'dd MMM yyyy H:m');
+            default:
+                return data;
+        }
+    }
+
 
     return (
         <>
             <div className='flex items-center justify-between'>
                 <div className='text-base font-bold text-gray-600'>{title}</div>
-                {showCloseIcon && <div data-tip='close table' className='text-white bg-red-600 rounded-full cursor-pointer' onClick={onCloseIcon}><CloseIcon /></div>}
+                {showCloseIcon && <div className='text-white bg-red-600 rounded-full cursor-pointer' onClick={onCloseIcon}><CloseIcon /></div>}
             </div>
             <div className="shadow-md table-responsive-vertical shadow-z-1">
                 <table id="table" className="table table-hover table-mc-light-blue">
@@ -96,7 +106,7 @@ const Table = ({ data, headers, title, isMultiSelectable, onMultiSelect, isSelec
                             <tr key={d['id']} className={cx(isSelectable && ' cursor-pointer', collapseOnSelect && selectedIndex && selectedIndex !== i && 'hidden')} onClick={() => isSelectable && onRowSelect(i, d)}>
                                 {isMultiSelectable && <td> <input id="checkitem" className="cursor-pointer" type="checkbox" checked={isChecked(d)} onChange={() => setCheckedItem(d)} /></td>}
                                 <td data-title="#">{i + 1}</td>
-                                {headers.map((h, key) => <td data-title={h.title} key={key}>{d[h.key]}</td>)}
+                                {headers.map((h, key) => <td data-title={h.title} key={key}>{formatData(h.type, d[h.key])}</td>)}
                             </tr>
                         )
                         }
