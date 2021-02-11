@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import cx from "classnames";
 import '../../assets/styles/table.css';
+import { CloseIcon } from './svg/icons';
 
 interface IProp {
     data: any[];
@@ -12,10 +13,12 @@ interface IProp {
     collapseOnSelect?: boolean;
     onSelect?: (selectedRow: any) => void;
     canDrilldown?: boolean;
+    showCloseIcon?: boolean;
+    onCloseIcon?: () => void;
 }
 
 
-const Table = ({ data, headers, title, isMultiSelectable, onMultiSelect, isSelectable, onSelect, collapseOnSelect, canDrilldown }: IProp) => {
+const Table = ({ data, headers, title, isMultiSelectable, onMultiSelect, isSelectable, onSelect, collapseOnSelect, canDrilldown, showCloseIcon, onCloseIcon }: IProp) => {
     const [selectedRows, setSelectedRows] = useState<any[]>([]);
     const [selectedIndex, setSelectedIndex] = useState<number>();
     const [checkedAll, setCheckedAll] = useState(false);
@@ -75,7 +78,10 @@ const Table = ({ data, headers, title, isMultiSelectable, onMultiSelect, isSelec
 
     return (
         <>
-            <div className='text-base font-bold text-gray-600'>{title}</div>
+            <div className='flex items-center justify-between'>
+                <div className='text-base font-bold text-gray-600'>{title}</div>
+                {showCloseIcon && <div data-tip='close table' className='text-white bg-red-600 rounded-full cursor-pointer' onClick={onCloseIcon}><CloseIcon /></div>}
+            </div>
             <div className="shadow-md table-responsive-vertical shadow-z-1">
                 <table id="table" className="table table-hover table-mc-light-blue">
                     <thead>
