@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import cx from "classnames";
 import { format, parseISO } from "date-fns";
 import '../../assets/styles/table.css';
-import { CloseIcon } from './svg/icons';
+import Icon from './svg/Icon';
 
 interface IProp {
     data: any[];
@@ -90,7 +90,7 @@ const Table = ({ data, headers, title, isMultiSelectable, onMultiSelect, isSelec
         <>
             <div className='flex items-center justify-between'>
                 <div className='text-base font-bold text-gray-600'>{title}</div>
-                {showCloseIcon && <div className='text-white bg-red-600 rounded-full cursor-pointer' onClick={onCloseIcon}><CloseIcon /></div>}
+                {showCloseIcon && <div className='text-white bg-red-600 rounded-full cursor-pointer' onClick={onCloseIcon}><Icon icon='close' /></div>}
             </div>
             <div className="shadow-md table-responsive-vertical shadow-z-1">
                 <table id="table" className="table table-hover table-mc-light-blue">

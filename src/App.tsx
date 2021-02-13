@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, useLocation, } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import ReactTooltip from 'react-tooltip';
-import { Home, ForgotPassword, Login, ResetPassword, Signup, VerifyAccount, NotFound, ProfilePage } from './pages';
+import { Home, ForgotPassword, Login, ResetPassword, Signup, VerifyAccount, NotFound, ProfilePage, AccountMgt, PermissionMgt, RoleMgt } from './pages';
 import { PrivateRoute } from './components/routes/PrivateRoute';
 
 
@@ -24,6 +24,10 @@ const App = () => {
 
         {/* <PrivateRoute path="/activities/:id" component={ActivityDetails} /> */}
         <PrivateRoute key={location.key} path={["/profile", "/profile/:id"]} component={ProfilePage} />
+
+        <PrivateRoute exact path='/mgt/account' component={AccountMgt} />
+        <PrivateRoute exact path='/mgt/role' component={RoleMgt} />
+        <PrivateRoute exact path='/mgt/permission' component={PermissionMgt} />
         <Route component={NotFound} />
       </Switch>
 

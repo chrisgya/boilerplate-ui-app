@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HomeIcon } from './svg/icons';
 import NavbarDropdown from './NavbarDropdown';
+import Icon from "./svg/Icon";
 
 const Navbar = () => {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -14,7 +14,7 @@ const Navbar = () => {
                         </Link>
                 <button className="block px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer sm:hidden focus:outline-none"
                     type="button" onClick={() => setNavbarOpen(prv => !prv)}>
-                    <HomeIcon />
+                    <Icon icon='home' />
                 </button>
             </div>
             <div className={"sm:flex flex-grow items-center" + (navbarOpen ? " flex" : " hidden")}>
@@ -24,7 +24,7 @@ const Navbar = () => {
                             className="flex items-center px-3 py-2 text-xs font-bold leading-snug uppercase hover:opacity-75"
                             href="#pablo"
                         >
-                            <HomeIcon /><span className="ml-2">Share</span>
+                            <Icon icon='home' /><span className="ml-2">Share</span>
                         </a>
                     </li>
                     <li>
@@ -32,7 +32,7 @@ const Navbar = () => {
                             className="flex items-center px-3 py-2 text-xs font-bold leading-snug uppercase hover:opacity-75"
                             href="#pablo"
                         >
-                            <HomeIcon /><span className="ml-2">Tweet</span>
+                            <Icon icon='home' /><span className="ml-2">Tweet</span>
                         </a>
                     </li>
                     <li>
@@ -40,7 +40,7 @@ const Navbar = () => {
                             className="flex items-center px-3 py-2 text-xs font-bold leading-snug uppercase hover:opacity-75"
                             href="#pablo"
                         >
-                            <HomeIcon /><span className="ml-2">Pin</span>
+                            <Icon icon='home' /><span className="ml-2">Pin</span>
                         </a>
                     </li>
 
@@ -55,14 +55,14 @@ const Navbar = () => {
                                 className="flex items-center px-3 py-2 text-xs font-bold leading-snug text-white hover:opacity-75"
                                 href="#pablo"
                             >
-                                <HomeIcon /><span className="ml-2">Share</span>
+                                <Icon icon='home' /><span className="ml-2">Share</span>
                             </a>
                         </li>
                         <li>
                             <a
                                 className="flex items-center px-3 py-2 text-xs font-bold leading-snug text-white hover:opacity-75"
                                 href="#pablo">
-                                <HomeIcon /><span className="ml-2">Share</span>
+                                <Icon icon='home' /><span className="ml-2">Share</span>
                             </a>
                         </li>
                     </div>

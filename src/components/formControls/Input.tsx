@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import cx from "classnames";
 import { useFormContext } from "react-hook-form";
-import { EyeIcon, EyeOffIcon } from "../shared/svg/icons";
+import Icon from "../shared/svg/Icon";
 
 type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   label?: string;
@@ -33,7 +33,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         ref={ref}
         onBlur={props.onBlur}
       />
-      {props.type === 'password' && <span className={cx("absolute cursor-pointer right-1", props.topClass ? props.topClass : "top-3")}> {open ? <EyeOffIcon onClick={() => setOpen(prv => !prv)} /> : <EyeIcon onClick={() => setOpen(prv => !prv)} />}</span>}
+      {props.type === 'password' && <span className={cx("absolute cursor-pointer right-1", props.topClass ? props.topClass : "top-3")}> {open ? <Icon icon='eye-off' onClick={() => setOpen(prv => !prv)} /> : <Icon icon='eye' onClick={() => setOpen(prv => !prv)} />}</span>}
 
       {!!formState.touched[props.name] && !!formState.errors[props.name] && !props.dontShowError && (
         <p className="text-red-600">{formState.errors[props.name].message}</p>

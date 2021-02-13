@@ -11,23 +11,6 @@ export interface IUser {
     lastUpdatedAt: Date,
     authorities: string[];
 }
-
-export interface IRole {
-    id: number;
-    name: string;
-    description: string;
-    createdBy: string;
-    createdAt: Date
-}
-
-export interface IPermission {
-    id: number;
-    name: string;
-    description: string;
-    createdBy: string;
-    createdAt: Date
-}
-
 export interface IUpdateUserRequest {
     firstName: string;
     middleName: string | null;

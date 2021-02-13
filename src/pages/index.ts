@@ -7,3 +7,7 @@ export { default as VerifyAccount } from './user/VerifyAccount';
 export { default as RequestConfirmationLink } from './user/RequestConfirmationLink';
 export { default as Home } from './home/Home';
 export { NotFound } from './NotFound';
+
+export { default as AccountMgt } from './admin/AccountMgt';
+export { default as RoleMgt } from './admin/RoleMgt';
+export { default as PermissionMgt } from './admin/PermissionMgt';

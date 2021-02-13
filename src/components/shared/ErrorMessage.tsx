@@ -1,6 +1,4 @@
-import React from "react"
-import { ExclamationIcon } from "./svg/icons"
-
+import Icon from "./svg/Icon"
 
 type messageType = {
     message?: string, reset: () => void
@@ -11,7 +9,7 @@ export const ErrorMessage = (prop: messageType) => {
         <div className="flex p-4 bg-red-200">
             <div className="mr-4">
                 <div className="flex items-center justify-center w-10 h-10 text-white bg-red-600 rounded-full">
-                    <ExclamationIcon />
+                    <Icon icon='exclamation' />
                 </div>
             </div>
             <div className="flex justify-between w-full">

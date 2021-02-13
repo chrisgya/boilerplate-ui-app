@@ -3,7 +3,7 @@ import agent from "../../api/agent";
 import { ME } from "../../utils/constants";
 
 const useMe = () => {
-  const { isSuccess, data, isError, error } = useQuery(ME, agent.User.me);
+  const { isSuccess, data, isError, error } = useQuery(ME, agent.User.me, { refetchInterval: false });
 
   if (isError) {
     console.log("ME error", error);

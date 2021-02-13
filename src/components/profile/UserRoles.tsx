@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import agent from "../../api/agent";
-import { IRole } from "../../interfaces/IUser";
+import { IRole } from "../../interfaces/IRole";
 import { ME_ROLES } from "../../utils/constants";
 import { Table } from "../shared";
 

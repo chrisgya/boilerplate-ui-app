@@ -1,6 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { IChangePasswordRequest, IUser, ILoginRequest, ILoginResponse, IResetPasswordRequest, ISignupRequest, IUpdateUserRequest, IEmailRequest, IUsernameRequest, IRole, IPermission } from "../interfaces/IUser";
+import { IPage } from "../interfaces/IPage";
+import { IPermission } from "../interfaces/IPermission";
+import { ICreateRoleRequest, IRole, IUpdateRoleRequest } from "../interfaces/IRole";
+import { IChangePasswordRequest, IUser, ILoginRequest, ILoginResponse, IResetPasswordRequest, ISignupRequest, IUpdateUserRequest, IEmailRequest, IUsernameRequest } from "../interfaces/IUser";
 import { ACCESS_TOKEN } from "../utils/constants";
 import { logout } from "../utils/helper";
 
@@ -74,6 +77,7 @@ const Account = {
 const User = {
   me: (): Promise<IUser> => requests.get("/users/me"),
   currentUserRoles: (): Promise<IRole[]> => requests.get("/users/me/roles"),
+  currentUserPermissions: (): Promise<IPermission[]> => requests.get("/users/me/permissions"),
   updateUser: (req: IUpdateUserRequest): Promise<IUser> => requests.put(`/users/me`, req),
   changeEmail: (req: IEmailRequest): Promise<void> => requests.post(`/users/change-email`, req),
   changeUsername: (req: IUsernameRequest): Promise<void> => requests.post(`/users/change-username`, req),
@@ -82,7 +86,14 @@ const User = {
 };
 
 const Role = {
+  getRoles: (params: URLSearchParams): Promise<IPage<IRole>> => axios.get(`/roles`, { params: params }).then(responseBody),
+  getRole: (id: number): Promise<IRole> => requests.get(`/roles/${id}`),
   getRolePermissions: (roleId: number): Promise<IPermission[]> => requests.get(`/roles/${roleId}/permissions`),
+  create: (req: ICreateRoleRequest): Promise<IRole> => requests.post(`/roles`, req),
+  update: (id: number, req: IUpdateRoleRequest): Promise<void> => requests.put(`/roles/${id}`, req),
+  delete: (id: number): Promise<void> => requests.del(`/roles/${id}`),
+  assignPermissionsToRole: (id: number, permissionIds: number[]): Promise<IPermission[]> => requests.put(`/roles/assign-permissions/${id}`, { permissionIds }),
+  removePermissionsFromRole: (id: number, permissionIds: number[]): Promise<void> => requests.put(`/roles/remove-permissions/${id}`, { permissionIds }),
 };
 
 // const Activities = {
