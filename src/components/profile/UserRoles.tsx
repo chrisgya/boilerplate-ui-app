@@ -26,7 +26,6 @@ function Roles() {
                     title="My Roles"
                     // isMultiSelectable={true}
                     // onMultiSelect={(selectedRoles) => console.log('selectedRoles', selectedRoles)}
-                    isSelectable={true}
                     collapseOnSelect={true}
                     onSelect={(selectedRole) => setSelectedRow(selectedRole)}
                 />}
@@ -36,7 +35,6 @@ function Roles() {
                     headers={permissionsHeaders}
                     data={permissions!}
                     title="Role's Permissions"
-                    showCloseIcon={true}
                     onCloseIcon={() => setSelectedRow(undefined)}
                 />}
         </div>

@@ -15,6 +15,7 @@ import { IErrorMessage } from '../../interfaces/IErrorMessage';
 import FormTitleAndError from '../../components/Layout/FormTitleAndError';
 import { ILoginRequest } from '../../interfaces/IUser';
 import { RedirectTo } from '../../components/routes/RedirectTo';
+
 const defaultValues = {
     email: '',
     password: ''
@@ -50,7 +51,6 @@ const LoginForm = () => {
     return (
         <FormLayout>
             <div className="smallInnerFormContainer">
-
                 <FormTitleAndError title="LOGIN" mutation={mutation} email={methods.getValues('email')} />
 
                 <FormProvider {...methods}>
