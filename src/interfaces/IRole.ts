@@ -9,8 +9,10 @@ export interface IRole {
 export interface ICreateRoleRequest {
     name: string;
     description: string;
+    permissionIds: number[];
 }
 export interface IUpdateRoleRequest {
     name: string;
     description: string;
+    permissionIds: number[];
 }

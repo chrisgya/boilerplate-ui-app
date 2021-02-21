@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { IPage } from "../interfaces/IPage";
-import { IPermission } from "../interfaces/IPermission";
+import { ICreatePermissionRequest, IPermission, IUpdatePermissionRequest } from "../interfaces/IPermission";
 import { ICreateRoleRequest, IRole, IUpdateRoleRequest } from "../interfaces/IRole";
 import { IChangePasswordRequest, IUser, ILoginRequest, ILoginResponse, IResetPasswordRequest, ISignupRequest, IUpdateUserRequest, IEmailRequest, IUsernameRequest } from "../interfaces/IUser";
 import { ACCESS_TOKEN } from "../utils/constants";
@@ -88,13 +88,22 @@ const User = {
 const Role = {
   getRoles: (params: URLSearchParams): Promise<IPage<IRole>> => axios.get(`/roles`, { params: params }).then(responseBody),
   getRole: (id: number): Promise<IRole> => requests.get(`/roles/${id}`),
-  getRolePermissions: (roleId: number): Promise<IPermission[]> => requests.get(`/roles/${roleId}/permissions`),
+  getRolePermissions: (id: number): Promise<IPermission[]> => requests.get(`/roles/${id}/permissions`),
   create: (req: ICreateRoleRequest): Promise<IRole> => requests.post(`/roles`, req),
   update: (id: number, req: IUpdateRoleRequest): Promise<void> => requests.put(`/roles/${id}`, req),
   delete: (id: number): Promise<void> => requests.del(`/roles/${id}`),
   assignPermissionsToRole: (id: number, permissionIds: number[]): Promise<IPermission[]> => requests.put(`/roles/assign-permissions/${id}`, { permissionIds }),
   removePermissionsFromRole: (id: number, permissionIds: number[]): Promise<void> => requests.put(`/roles/remove-permissions/${id}`, { permissionIds }),
 };
+
+const Permission = {
+  getPermissions: (params: URLSearchParams): Promise<IPage<IPermission>> => axios.get(`/permissions`, { params: params }).then(responseBody),
+  getPermission: (id: number): Promise<IPermission> => requests.get(`/permissions/${id}`),
+  getPermissionRoles: (id: number): Promise<IRole[]> => requests.get(`/permissions/${id}/roles`),
+  create: (req: ICreatePermissionRequest): Promise<IPermission> => requests.post(`/permissions`, req),
+  update: (id: number, req: IUpdatePermissionRequest): Promise<void> => requests.put(`/permissions/${id}`, req),
+};
+
 
 // const Activities = {
 //   list: (params: URLSearchParams): Promise<IActivitiesEnvelope> =>
@@ -123,11 +132,10 @@ const Role = {
 // };
 
 const agent = {
-  // Activities,
   User,
   Account,
   Role,
-  // Profiles,
+  Permission,
 };
 
 export default agent;

@@ -4,15 +4,18 @@ import { format, parseISO } from "date-fns";
 import '../../assets/styles/table.css';
 import Icon from './svg/Icon';
 import Pagination from './Pagination';
+import Spin from './svg/Spin';
 
 interface IProp {
     data: any[];
     headers: any[];
     title?: string;
+    loadingData?: boolean;
     onMultiSelect?: (selectedRows: any[]) => void;
     collapseOnSelect?: boolean;
     onSelect?: (selectedRow: any) => void;
     onCloseIcon?: () => void;
+    totalElements?: number;
     totalPages?: number;
     pagesRange?: number;
     onPageSelected?: (selectedValue: number) => void;
@@ -21,10 +24,12 @@ interface IProp {
 }
 
 
-const Table = ({ data, headers, title, onMultiSelect, onSelect, collapseOnSelect, onCloseIcon, totalPages, pagesRange, onPageSelected, onMainAddButtonClick, onSort }: IProp) => {
+const Table = ({ data, headers, title, loadingData, onMultiSelect, onSelect, collapseOnSelect, onCloseIcon, totalElements, totalPages, pagesRange, onPageSelected, onMainAddButtonClick, onSort }: IProp) => {
     const [selectedRows, setSelectedRows] = useState<any[]>([]);
+    const [removedRows, setRemovedRows] = useState<any[]>([]);
     const [selectedIndex, setSelectedIndex] = useState<number>();
     const [checkedAll, setCheckedAll] = useState(false);
+    const [allWasChecked, setAllWasChecked] = useState(false);
     const [sortField, setSortField] = useState<string | null>(null);
     const [sortDirection, setSortDirection] = useState<string | null>(null);
     const [sortIcon, setSortIcon] = useState('chevron-right');
@@ -66,34 +71,42 @@ const Table = ({ data, headers, title, onMultiSelect, onSelect, collapseOnSelect
 
     const setCheckedItem = (selRow: any) => {
         const newSelection = [...selectedRows];
+        const index = getRowIndex(newSelection, selRow);
 
-        const indx = newSelection.findIndex(row => JSON.stringify(row) === JSON.stringify(selRow));
-
-        if (indx > -1) {
-            newSelection.splice(indx, 1);
+        if (index > -1) {
+            const removedRow = newSelection.splice(index, 1);
+            if (allWasChecked) { setRemovedRows(prv => [...prv, removedRow[0]]); }
         } else {
             newSelection.push(selRow);
+            if (allWasChecked) {
+                const index = getRowIndex(removedRows, selRow);
+                if (index > -1) {
+                    const rows = removedRows.filter(row => JSON.stringify(row) !== JSON.stringify(selRow))
+                    setRemovedRows(rows);
+                }
+            }
         }
 
         setSelectedRows(newSelection);
-        setCheckedAll(newSelection.length === data.length ? true : false);
+        setCheckedAll(newSelection.length === totalElements ? true : false);
         if (onMultiSelect) onMultiSelect(newSelection);
     }
 
 
     const setAllCheckedItems = () => {
         const newSelection = [...selectedRows];
-
+        console.log('!checkedAll', !checkedAll);
         if (!checkedAll) {
             data.forEach(r => {
-                const indx = newSelection.findIndex(n => JSON.stringify(n) === JSON.stringify(r));
+                const indx = getRowIndex(newSelection, r);
                 if (indx === -1) {
                     newSelection.push(r);
                 }
             });
         } else {
+            setRemovedRows([]);
             data.forEach(r => {
-                const indx = newSelection.findIndex(n => JSON.stringify(n) === JSON.stringify(r));
+                const indx = getRowIndex(newSelection, r);
                 if (indx > -1) {
                     newSelection.splice(indx, 1);
                 }
@@ -102,12 +115,35 @@ const Table = ({ data, headers, title, onMultiSelect, onSelect, collapseOnSelect
 
         setSelectedRows(newSelection);
         setCheckedAll(prv => !prv);
+        setAllWasChecked(prv => !prv);
         if (onMultiSelect) onMultiSelect(newSelection);
     }
 
     const isChecked = (selRow: any) => {
-        return selectedRows.findIndex(row => JSON.stringify(row) === JSON.stringify(selRow)) > -1 ? true : false;
+        if (checkedAll) {
+            if (!rowExists(selectedRows, selRow)) { setSelectedRows(prv => [...prv, selRow]); }
+            return true;
+        }
+        if (allWasChecked) {
+            if (rowExists(removedRows, selRow)) {
+                return false;
+            } else {
+                if (!rowExists(selectedRows, selRow)) { setSelectedRows(prv => [...prv, selRow]); }
+                return true;
+            }
+
+        }
+
+        return rowExists(selectedRows, selRow) ? true : false;
     }
+
+    const rowExists = (rows: any[], selRow: any) => {
+        return rows.findIndex(row => JSON.stringify(row) === JSON.stringify(selRow)) > -1;
+    }
+    const getRowIndex = (rows: any[], selRow: any) => {
+        return rows.findIndex(row => JSON.stringify(row) === JSON.stringify(selRow));
+    }
+
 
     const formatData = (type: string, data: any) => {
         switch (type) {
@@ -121,6 +157,10 @@ const Table = ({ data, headers, title, onMultiSelect, onSelect, collapseOnSelect
 
     return (
         <>
+            <div>removedRows: {JSON.stringify(removedRows, null, 2)}</div>
+            <div>SelectedRows: {selectedRows?.length}</div>
+            <div>removedRows: {removedRows?.length}</div>
+            <div>totalElements: {totalElements}</div>
             <div className='flex items-center justify-between'>
                 <div className='text-base font-bold text-gray-600'>{title}</div>
                 <div className='space-x-2'>
@@ -128,7 +168,8 @@ const Table = ({ data, headers, title, onMultiSelect, onSelect, collapseOnSelect
                     {onCloseIcon && <div className='text-white bg-red-600 rounded-full cursor-pointer' onClick={onCloseIcon}><Icon icon='close' /></div>}
                 </div>
             </div>
-            <div className="shadow-md table-responsive-vertical shadow-z-1">
+            <div className="relative shadow-md table-responsive-vertical shadow-z-1">
+                {loadingData && <div className="absolute w-10 h-10 text-blue-700 top-2/4 left-2/4"><Spin /></div>}
                 <table id="table" className="table table-hover table-mc-light-blue">
                     <thead>
                         <tr>
@@ -149,7 +190,7 @@ const Table = ({ data, headers, title, onMultiSelect, onSelect, collapseOnSelect
                     </tbody>
                 </table>
             </div>
-            { onPageSelected && <Pagination totalPages={totalPages!} range={pagesRange!} onClick={(value) => onPageSelected(value)} />}
+            { onPageSelected && <Pagination isBusy={loadingData} totalPages={totalPages!} range={pagesRange!} onClick={(value) => onPageSelected(value)} />}
 
         </>
     )

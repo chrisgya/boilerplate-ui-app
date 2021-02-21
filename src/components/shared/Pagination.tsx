@@ -5,9 +5,10 @@ interface IProp {
     totalPages: number;
     range: number;
     onClick: (selectedValue: number) => void;
+    isBusy?: boolean;
 }
 
-function Pagination({ totalPages, range, onClick }: IProp) {
+function Pagination({ totalPages, range, onClick, isBusy }: IProp) {
     const [currentPage, setCurrentPage] = useState(1);
     const [startPointer, setStartPointer] = useState(1);
     const [endPointer, setEndPointer] = useState(range);
@@ -26,6 +27,8 @@ function Pagination({ totalPages, range, onClick }: IProp) {
         setEndPointer(range);
         setCurrentPage(1);
         onClick(1);
+
+        console.log('first hit.....')
     }
 
     const setPrvElipsePages = (isElipse: boolean) => {
@@ -59,6 +62,7 @@ function Pagination({ totalPages, range, onClick }: IProp) {
         if (!isEndPointerSet) {
             setEndPointer(endIndex);
         }
+        console.log('setPrvElipsePages hit.....')
     }
 
     const setPrvPages = () => {
@@ -68,11 +72,14 @@ function Pagination({ totalPages, range, onClick }: IProp) {
             onClick(currentPage - 1);
             setCurrentPage(prv => prv - 1);
         }
+        console.log('setPrvPages hit.....')
     }
 
     const setLoopCurrentValue = (selectedValue: number) => {
         onClick(selectedValue);
         setCurrentPage(selectedValue);
+        console.log('setLoopCurrentValue hit.....')
+
     }
 
     const setNextElipsePages = (isElipse: boolean) => {
@@ -109,6 +116,8 @@ function Pagination({ totalPages, range, onClick }: IProp) {
             onClick(startIndex);
         }
         setEndPointer(endIndex);
+        console.log('setNextElipsePages hit.....')
+
     }
 
 
@@ -119,6 +128,8 @@ function Pagination({ totalPages, range, onClick }: IProp) {
             onClick(currentPage + 1);
             setCurrentPage(prv => prv + 1);
         }
+        console.log('setNextPages hit.....')
+
     }
     const setLastPages = () => {
         const newPages: number[] = [];
@@ -132,28 +143,37 @@ function Pagination({ totalPages, range, onClick }: IProp) {
         onClick(totalPages);
         setStartPointer(end);
         setEndPointer(totalPages);
+        console.log('setLastPages hit.....')
+
     }
 
-    useEffect(setFirstPages, [onClick, range, totalPages])
+    useEffect(setFirstPages, [range, totalPages])
 
 
     return (
-        <div className="flex items-center justify-between p-1 text-gray-800 bg-white">
-            <div>Page <span className='font-bold'>{currentPage}</span> of <span className='font-bold'>{totalPages}</span></div>
-            <div className='space-x-2 '>
-                <button disabled={currentPage === 1} className={cs(currentPage === 1 && ' cursor-not-allowed')} onClick={setFirstPages}>First</button><span>|</span>
-                <button disabled={currentPage === 1} className={cs(currentPage === 1 && ' cursor-not-allowed')} onClick={setPrvPages}>Prev</button>
-
-
-                {startPointer > range && <button className='font-bold' onClick={() => setPrvElipsePages(true)}>...</button>}
-
-                {pages.map(page => <button key={page} disabled={currentPage === page} className={cs('px-1 rounded-sm bg-gray-200', currentPage === page && 'bg-blue-300 font-bold cursor-not-allowed')} onClick={() => setLoopCurrentValue(page)}>{page}</button>)}
-
-                {endPointer < totalPages && <button className='font-bold' onClick={() => setNextElipsePages(true)}>...</button>}
-                <button disabled={currentPage === totalPages} className={cs(currentPage === totalPages && ' cursor-not-allowed')} onClick={setNextPages}>Next</button><span>|</span>
-                <button disabled={currentPage === totalPages} className={cs(currentPage === totalPages && ' cursor-not-allowed')} onClick={setLastPages}>Last</button>
+        <>
+            <div>
+                <span>currentPage: {currentPage}</span>
+                <span>startPointer: {startPointer}</span>
+                <span>endPointer: {endPointer}</span>
             </div>
-        </div>
+            <div className="flex items-center justify-between p-1 text-gray-800 bg-white">
+                <div>Page <span className='font-bold'>{currentPage}</span> of <span className='font-bold'>{totalPages}</span></div>
+                <div className='space-x-2'>
+                    <button disabled={currentPage === 1 || isBusy} className={cs(currentPage === 1 && ' cursor-not-allowed')} onClick={setFirstPages}>First</button><span>|</span>
+                    <button disabled={currentPage === 1 || isBusy} className={cs(currentPage === 1 && ' cursor-not-allowed')} onClick={setPrvPages}>Prev</button>
+
+                    {startPointer > range && <button disabled={isBusy} className='font-bold' onClick={() => setPrvElipsePages(true)}>...</button>}
+
+                    {pages.map(page => <button key={page} disabled={currentPage === page || isBusy} className={cs('px-1 rounded-sm bg-gray-200', currentPage === page && 'bg-blue-300 font-bold cursor-not-allowed')} onClick={() => setLoopCurrentValue(page)}>{page}</button>)}
+
+                    {endPointer < totalPages && <button disabled={isBusy} className='font-bold' onClick={() => setNextElipsePages(true)}>...</button>}
+
+                    <button disabled={currentPage === totalPages || isBusy} className={cs(currentPage === totalPages && ' cursor-not-allowed')} onClick={setNextPages}>Next</button><span>|</span>
+                    <button disabled={currentPage === totalPages || isBusy} className={cs(currentPage === totalPages && ' cursor-not-allowed')} onClick={setLastPages}>Last</button>
+                </div>
+            </div>
+        </>
     )
 }
 
